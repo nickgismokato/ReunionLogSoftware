@@ -1,0 +1,5 @@
+link/ether 48:5f:99:8d:1a:6d brd ff:ff:ff:ff:ff:ff
+    inet 192.168.87.26/24 brd 192.168.87.255 scope global dynamic noprefixroute wlp2s0
+       valid_lft 78943sec preferred_lft 78943sec
+    inet6 fe80::cfa6:6a93:2aee:e68a/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever

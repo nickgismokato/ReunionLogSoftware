@@ -4,16 +4,19 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ReunionLogSoftware;
 
-public class Game1 : Game
+public class Main : Game
 {
     private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
-
-    public Game1()
+    private SpriteBatch spriteBatch;
+    private SpriteFont testFont;
+    private int i = 0;
+    //private Game.Window indputTest;
+    public Main()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+        
     }
 
     protected override void Initialize()
@@ -25,8 +28,8 @@ public class Game1 : Game
 
     protected override void LoadContent()
     {
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+        spriteBatch = new SpriteBatch(GraphicsDevice);
+        testFont = Content.Load<SpriteFont>("Test");
         // TODO: use this.Content to load your game content here
     }
 
@@ -36,14 +39,18 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-
+        i++;    
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.Black);
 
+        spriteBatch.Begin();
+        spriteBatch.DrawString(testFont, "Hello World!", new Vector2(100,100), Color.White);
+        spriteBatch.DrawString(testFont, i.ToString(), new Vector2(110, 160), Color.White);
+        spriteBatch.End();
         // TODO: Add your drawing code here
 
         base.Draw(gameTime);
