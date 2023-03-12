@@ -49,7 +49,7 @@ public class Main : Game
 
         spriteBatch.Begin();
         spriteBatch.DrawString(testFont, "Hello World!", new Vector2(100,100), Color.White);
-        spriteBatch.DrawString(testFont, i.ToString(), new Vector2(110, 160), Color.White);
+        spriteBatch.DrawString(testFont, (i % 60).ToString(), new Vector2(110, 160), Color.White);
         spriteBatch.End();
         // TODO: Add your drawing code here
 

@@ -1,0 +1,493 @@
+\documentclass[10pt, a4paper]{memoir}
+\aliaspagestyle{cleared}{plain}
+
+%--------------------------------------------------------- Style setup ---------------------------------------------------------
+
+
+%--------------------------------------------------------- Package Setup ---------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+%\usepackage{textcomp}
+%\usepackage{lmodern}
+%\usepackage[T1]{fontenc}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{mathtools} %Extensions to amsmath
+\usepackage{mathrsfs} %Provide \mathscr command
+\usepackage{nccmath} %Improve space of \displaybreak and more
+\usepackage{graphicx} %Include graphics
+\usepackage{datetime} %Datetime
+\usepackage{advdate} %\today
+\usepackage{verbatim} 
+\usepackage[english]{babel}
+\usepackage{gensymb} %\degree, \celsius, etc.
+\usepackage{bm} %\bm
+\usepackage{float} %Add H float modifier
+\usepackage{wasysym } %Contradiction arrow
+\usepackage{enumitem} %Add control to enumerate environment
+\usepackage{xpatch}  %\better declaration
+\usepackage{capt-of} %\captionof for something not a float
+\usepackage{caption}
+\usepackage{pdfpages} %Add multipage pdf document option
+\usepackage{color}
+\usepackage{geometry}
+\usepackage[noanswer]{exercise} %Add exercise environment
+
+\usepackage{esdiff} %Add easy diff by \diff
+\usepackage{fancyhdr} %Used for building footers and headers
+\usepackage{courier} %Courier font
+%\usepackage{framed} %Create framed, shaded and leftbar environment
+\usepackage{mdframed} %Same as framed just add breakable framed and coloured boxes
+%\usepackage{lipsum} % for creating dummy text
+\usepackage{cancel} %Used for \cancel that draws a slash through its argument.
+\usepackage{collectbox} %\savebox
+\usepackage[most]{tcolorbox} %Add coloured boxes
+\usepackage{varwidth} %varwidth enviorment is minipage where width is a maximum value
+\usepackage{physics}
+\usepackage{nameref}%\nameref
+
+\usepackage{siunitx}
+\sisetup{exponent-product = \cdot,per-mode=reciprocal-positive-first}
+
+\usepackage{braket} %Add braket notation
+\addto\captionsdanish{%
+}
+
+\usepackage{hyperref} %Load last ALWAYS
+
+\usepackage{titlesec} %Change space of sections and subsections
+
+%--------------------------------------------------------- Theorems setup ---------------------------------------------------------
+\numberwithin{equation}{section}
+\newtheoremstyle{defp}% name
+{}% Space above
+{}% Space below
+{}% Body font
+{}% Indent amount1
+{\bfseries}% Theorem head font
+{\newline}% hPunctuation after theorem head
+{0.1em}% Space after theorem head2
+{}% Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defq}% name
+{1em}% Space above
+{}% Space below
+{\itshape}% Body font
+{}% Indent amount1
+{\bfseries}% Theorem head font
+{\newline}% hPunctuation after theorem head
+{}% Space after theorem head2
+{}% Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{dotless}%
+{}%
+{}%
+{\itshape}%
+{}%
+{\bfseries}%
+{\newline}%
+{1em}%
+{}%
+
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+    \normalfont \topsep6\p@\@plus6\p@\relax
+    \trivlist
+    \item[\hskip\labelsep
+        \itshape
+        #1\@addpunct{.} \newline] }%\ignorespaces}
+\makeatother
+
+\renewcommand*{\proofname}{Proof}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+
+\theoremstyle{defp}
+\newtheorem{de}[thm]{Definition}
+
+\theoremstyle{dotless}
+\theoremstyle{definition}
+\newtheorem*{eks}{Example}
+\theoremstyle{dotless}
+\newtheorem{st}[thm]{Theorem}
+\theoremstyle{dotless}
+\newtheorem{lem}[thm]{Lemma}
+\theoremstyle{defp}
+\newtheorem{po}{Postulat}
+\theoremstyle{defp}
+\newtheorem*{ko}{Konstuktion}
+\makeatletter
+\patchcmd{\th@be}{\thm@headfont{\itshape}}{\thm@headfont{\normalfont}}{}{}
+\makeatother
+\theoremstyle{be}          % in order to avoid content to be printed in italics
+\newtheorem*{be}{Note} 
+\theoremstyle{defp}
+\newtheorem*{no}{Notation}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+%    #1\@addpunct{.}]\ignorespaces% DELETED
+    #1]\ignorespaces% ADDED
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+
+%\usepackage{ucs,babel} %No idea
+%\usepackage[all,cmtip]{xy} %No idea
+
+
+
+%--------------------------------------------------------- Own Definitions ---------------------------------------------------------
+\makeatother
+\def\doubleunderline#1{\underline{\underline{#1}}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand\myeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+\newcommand{\BAR}{%
+  \hspace{-\arraycolsep}%
+  \strut\vrule % the `\vrule` is as high and deep as a strut
+  \hspace{-\arraycolsep}%
+}
+
+\newcommand{\ch}{\cosh}
+\newcommand{\sh}{\sinh}
+\newcommand{\tnh}{\tanh}
+\newcommand{\Arcosh}{\operatorname{Arcosh}}
+\newcommand{\Arsinh}{\operatorname{Arsinh}}
+\newcommand{\Artanh}{\operatorname{Artanh}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand\nm[1]{\left\lVert#1\right\rVert}
+\DeclarePairedDelimiter\abss{\lvert}{\rvert}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand\lf[1]{\left(#1\right)}
+\newcommand\pr[1]{#1^\prime}
+\newcommand\lfa[1]{\langle#1\rangle}
+\newcommand\lff[1]{\left[#1\right]}
+\newcommand\mb[1]{\mathbb{#1}}
+\newcommand\mc[1]{\mathcal{#1}}
+\newcommand\code[1]{\texttt{#1}}
+\newcommand\inproc[1]{\langle#1\rangle}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand\ttt[1]{\texttt{#1}}
+
+%--------------------------------------------------------- CS Setup ---------------------------------------------------------
+
+
+\usepackage{forest}
+\usepackage{adjustbox}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\algrenewcommand{\algorithmicrequire}{\textbf{Input:}}
+\algrenewcommand{\algorithmicensure}{\textbf{Output:}}
+\algnewcommand\An{\textbf{ And } }
+\algnewcommand\Or{\textbf{ Or } }
+\algnewcommand\To{\textbf{ to } }
+
+\let\oldReturn\Return
+\renewcommand{\Return}{\State\oldReturn}
+
+%for at lave  i align enviorment
+\makeatletter
+\let\save@measuring@true\measuring@true
+\def\measuring@true{%
+  \save@measuring@true
+  \def\beamer@sortzero##1{\beamer@ifnextcharospec{\beamer@sortzeroread{##1}}{}}%
+  \def\beamer@sortzeroread##1<##2>{}%
+  \def\beamer@finalnospec{}%
+}
+\makeatother
+
+%pause efter hvert ligning
+\makeatletter
+\g@addto@macro\normalsize{%
+    \setlength\belowdisplayskip{2pt}
+}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+    \setlength\abovedisplayskip{7pt}
+}
+
+%Lille o notation \smallO
+\newcommand\smallO{
+  \mathchoice
+    {{\scriptstyle\mathcal{O}}}% \displaystyle
+    {{\scriptstyle\mathcal{O}}}% \textstyle
+    {{\scriptscriptstyle\mathcal{O}}}% \scriptstyle
+    {\scalebox{.7}{$\scriptscriptstyle\mathcal{O}$}}%\scriptscriptstyle
+  }
+
+\usepackage{chngcntr}
+\counterwithout{equation}{section} % remove the chapter number
+% \counterwithin{equation}{section}  % add the chapter number
+
+\usepackage[newfloat]{minted}
+
+
+
+
+\definecolor{mauve}{HTML}{E0B0FF}
+\lstset{
+  language=R,
+  basicstyle=\footnotesize, 
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,    
+  firstnumber=1,
+  numbersep=5pt,
+  numberfirstline=true,
+  tabsize=3,
+  frame = single,
+  breaklines=true,
+  title=\lstname,
+  keywordstyle=\color{blue},
+  commentstyle=\color{olive},
+  stringstyle=\color{mauve}
+}
+
+
+\definecolor{codegray}{gray}{0.85}
+\newcommand{\codes}[1]{\colorbox{codegray}{\texttt{#1}}}
+
+
+\definecolor{block-gray}{gray}{0.85}
+\newtcolorbox{myquote}{colback=block-gray,grow to right by=-10mm,grow to left by=-10mm,
+boxrule=0pt,boxsep=0pt,breakable}
+\makeatletter
+\def\quoteparse{\@ifnextchar`{\quotex}{\singlequote}}
+\def\quotex#1{\@ifnextchar`{\triplequote\@gobble}{\doublequote}}
+\makeatother
+\def\singlequote#1`{[StartQ]#1[EndQ]\qOn}
+\def\doublequote#1``{[StartQQ]#1[EndQQ]\qOn}
+\long\def\triplequote#1```{\begin{myquote}\parskip 1ex#1\end{myquote}\qOn}
+\def\qOn{\catcode``=\active}
+\def\qOff{\catcode``=12}
+\qOn
+\def`{\qOff \quoteparse}
+\qOff
+
+\usepackage{chngcntr}
+\counterwithin{Exercise}{section}
+
+%Move exercise to left side
+%\renewcommand{\ExerciseHeader}{%
+%  \par\noindent
+%  \textbf{\large \ExerciseName \ \ExerciseHeaderNB\ExerciseHeaderTitle\ExerciseHeaderOrigin}%
+%  \par\nopagebreak\medskip
+%}
+\setlength\parindent{0pt}
+
+\renewcommand{\ExerciseHeader}{\large\textbf{\ExerciseName~\ExerciseHeaderNB} \smallskip\newline}
+\renewcommand{\AtBeginExercise}{\hspace{-0.66em}}
+
+\renewcommand{\AnswerHeader}{\large\textbf{\AnswerName~\ExerciseHeaderNB}\smallskip\newline}
+
+\setlength\AnswerSkipBefore{1em}
+
+\usepackage{pgfplots}
+\usetikzlibrary{positioning}
+
+\newcommand{\CS}{C\nolinebreak\hspace{-.05em}\raisebox{.6ex}{\tiny \#}}
+
+
+
+%--------------------------------------------------------- Beginning of document ---------------------------------------------------------
+
+\setlength\arraycolsep{2 pt}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+
+\titlespacing*{\section}
+{0pt}{3ex plus 1ex minus .2ex}{1ex plus .5ex}
+
+\titlespacing*{\subsection}
+{0pt}{1ex plus 0.5ex minus .2ex}{1ex plus .2ex}
+
+\openany
+
+
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\usepackage{csquotes}
+
+\usepackage[authordate,backend=bibtex, bibencoding=utf8]{biblatex-chicago}
+\addbibresource{ref.bib}
+\begin{document}
+
+%--------------------------------------------------------- Document Setup ---------------------------------------------------------
+
+\newcommand*\mytitle{\textsc{Software Requirements for ReunionLog}}
+
+
+\title{\mytitle \\[1ex] \large \textsc{Reunion}\\}
+%\date{\AdvanceDate[0]\today \\ }
+\date{}
+
+\centering
+\maketitle
+	{\scshape\LARGE \LaTeX \par}
+	\vspace{0.5cm}
+	{Main Programmer and lead Designer - \Large\scshape Nickgismokato\par}
+	\vspace{0.3cm}
+	{Design contributor - \Large\scshape Bj\par}
+	\vspace{0.3cm}
+	{Design contributor \& tester - \Large\scshape Casper\par}
+	\vspace{1cm}
+	\vfill
+	Written by\par
+	~Nick \textsc{Laursen}
+
+
+\thispagestyle{empty}
+
+\newpage
+
+\section*{\centering Preface}
+
+%\raggedright
+This is the documentation of the requirements we want to follow when creating the program \textsc{ReunionLog}. We will be following the \textsc{SOLID} principles. This software is a program meant for the guild \textsc{Reunion} in the game \textsc{World Of Warcraft}. This software will use the \ttt{API} from \textsc{WarcraftLogs}. 
+
+\medskip
+
+Most of these requirements have been gathered from multiple months of pre-gathering data from the \textsc{WarcraftLogs} \ttt{API}. This has been done by creating a \textit{proof-of-concept} program with \textsc{Python}.
+
+\medskip
+
+\center
+
+This software is under the \textsc{MIT License}. Read \ttt{LICENSE} for more information.
+
+
+\tableofcontents
+
+\newpage
+
+\raggedright
+
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+
+\fancyhf{}
+\rhead{\fancyplain{}{$ $\leftmark $ $}} % predefined ()
+\lhead{\fancyplain{}{$ $\mytitle$ $}} % 1. sectionname, 1.1 subsection name etc
+\cfoot{\fancyplain{}{\thepage}}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[CF]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+%--------------------------------------------------------- Document ---------------------------------------------------------
+
+\chapter{\textsc{WarcraftLogs} and the \ttt{API}}
+
+\section*{Abstract}
+
+This chapter will go through \textsc{WarcraftLogs} and the \ttt{API} correlating. For this chapter we will not go through the actual documentation but rather give a short refer to the documentation and lay out the most important aspect from the site and the \ttt{API}
+
+\section{Website}
+
+The website for \textsc{WarcraftLogs}\footnote{\url{https://www.warcraftlogs.com/}} is a popular website used by guilds to gather data to one single site. This is done though multiple addons and their own in-house software. 
+
+\subsection{Overall form}
+
+The data than can be collected is both in the form of \textsc{Guild} data, \textsc{Raid} data, \textsc{Dungeon} data, \textsc{Character} data and much more. These can be accessed for all through the website. This can be done by everyone anonymously.
+
+\medskip
+
+The website uses \textsc{graphQL} to display most of their data. Both in tables both also in graphs and tables containing graphics. This gives an easier overview for most users. They to also have some options you can choose for the specific data you want to be showed. 
+
+\medskip
+
+A downside to this approach is that a lot of the specific options is not showed. One could reason the "\textit{simpler}" design is because they want all users to use their website, no matter their technical background. 
+
+\subsection{Specific to our needs}
+
+What described in \textbf{Section 1.1.1} sound really great and reasonable useful for most users case. This is indeed the case for most users, but if you want the information not available on the site or you want another way to represent the data, then the site is not for you. This is why we will be using the data given to us by the \ttt{API}.
+
+\medskip
+
+The only need we have of the website is to check if the information we get is also the information displayed on the site.  
+
+\section{Documentation for the \ttt{API}}
+
+The \ttt{API} and it's documentation is, for a lack of a better word, idiotic made. There exists two \ttt{API}'s. Version 1 and version 2. We will be using the latter. This version has "\textit{better}" documentation than it's counterpart and uses \textsc{OAuth 2.0} for it's \ttt{API} authentication. The documentation can be found two places. For authentication documentation you can find it at \cite{AuthLink} and you can find the actual command call documentation at \cite{DocLink}.
+
+\subsection{\textsc{GraphQL}}
+
+The first thing we should worry about is the authentication. As mentioned in the \textbf{Preface} we have already made successful connection, therefore this will be discussed later.  
+
+\medskip
+
+\textsc{GraphQL} is the schema of how to make calls to the \ttt{API}. This is done by sending you authentication and a "\textit{Query}" call. This is in simple terms just a string with specific data. This data is both used to tell \textsc{WarcraftLogs} server what you would like to receive bout also where in the schema the server would have to lookup this data. Clearly there is a need to create these query strings. 
+
+\medskip
+
+Therefore we will be using \ttt{GraphQL} library from \textsc{Graphql-dotnet}. More information can be found at \cite{GQLdotnet}. If you were to look at \cite{DocLink} you would find there is a lot of commands you can send. Therefore it is important to create an object which can be agile and create all the necessary strings which we will be using.  
+
+\subsection{Limitation of the \ttt{API}}
+
+\section{Integration from the \ttt{API} to C\ttt{\#}}
+
+\subsection{Authentication}
+
+\subsection{Data extracted from the \ttt{API}}
+
+\newpage
+
+\chapter{Our software main requirements}
+
+\section*{Abstract}
+
+\section{Authentication}
+
+\section{Events}
+
+\section{Query Strings }
+
+\section{\ttt{.CSV} file}
+
+\newpage
+
+\chapter{Flow of \textsc{ReunionLog}}
+
+\section*{Abstract}
+
+\section{Simple Overview}
+
+\section{Needs for each main Requirements}
+
+\newpage
+
+\chapter{Responsibilities for our requirements}
+
+\section*{Abstract}
+
+\section{Responsibilities}
+
+\section{\textsc{UML} Diagram}
+
+\newpage
+
+\printbibliography
+\end{document}
+
