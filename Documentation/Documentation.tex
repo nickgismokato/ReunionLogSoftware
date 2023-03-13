@@ -55,6 +55,8 @@
 \usepackage{hyperref} %Load last ALWAYS
 
 \usepackage{titlesec} %Change space of sections and subsections
+\usepackage{cleveref}
+
 
 %--------------------------------------------------------- Theorems setup ---------------------------------------------------------
 \numberwithin{equation}{section}
@@ -331,6 +333,11 @@ boxrule=0pt,boxsep=0pt,breakable}
 
 \usepackage[authordate,backend=bibtex, bibencoding=utf8]{biblatex-chicago}
 \addbibresource{ref.bib}
+
+%Styling of quotes
+\usepackage{etoolbox}
+\AtBeginEnvironment{quote}{\par\singlespacing\small}
+
 \begin{document}
 
 %--------------------------------------------------------- Document Setup ---------------------------------------------------------
@@ -446,7 +453,51 @@ Therefore we will be using \ttt{GraphQL} library from \textsc{Graphql-dotnet}. M
 
 \subsection{Limitation of the \ttt{API}}
 
+When it comes to the \ttt{API} a lot of limits start to show. Some in the documentation and some in the actual \ttt{API} itself. Let us start talking about the \ttt{API} itself. When on a free tier, i.e not subscribed to \textsc{WarcraftLogs} website, you can at maximum make 3.600 calls to their server pr. hour. This inherently doesn't sound that bad, but you will later see in depths why this is a bad system. 
+
+\medskip
+
+I will agree that this stops most novice \ttt{DDOS} attacks to their server, but since the introduction of the second version of their \ttt{API}, multiple clients can easily be set up and could potentially help in the \ttt{DDOS} attacks. Let us now explain why this rate limit is bad when you want to make a software that pulls a great amount of data. 
+
+\medskip
+
+Let us say you had a guild that was raiding and you both raided \textsc{Mythic} and \textsc{Heroic} during the same log. Let us furthermore assume you want the data for when they die and how many pulls they were on, but only for the mythic. By scouring through their schema documentation (\cite{DocLink}), you find the \ttt{Report} object inside the documentation. This is essentially what you want. So you create a query string with \ttt{report} as first argument and and then you scour through the documentation and find the \ttt{event} option which deliver a \ttt{ReportEventPaginator} which is just a list event in the log file. This gets returned as data in form of a \ttt{JSON} string. Let us see the documentation for it:
+
+\begin{displayquote}[\cite{DocLink}]
+"A set of paginated report events, filterable via arguments like type, source,t arget, ability, etc. This data is not considered frozen, and it can change without notice. Use at your own risk."
+\end{displayquote}
+
+This object has an argument you can filter from called \ttt{difficulty}. The documentation for this is as follow:
+
+\begin{displayquote}[\cite{DocLink}]
+"\textbf{difficulty}: Optional. Whether or not to filter the fights to a specific difficulty. By default all fights are included."
+\end{displayquote}
+
+This is brilliant. We can now filter our \ttt{Event} to mythic only. Later down the line is argue that \ttt{difficulty} is an integer value. Great so now we just need to figure our what integer value. This is the first hurdle we found when trying this. No actual documentation is given for the arguments, except if it is an object or enum type which they have created. So we set up in \textsc{Python} a script to run through with value $n$ where $n\in\set{-1000,-999,\dots,999,1000}$. Then we checked if there where any difference between the \ttt{JSON} strings we received and we got that there was no difference for any $n$ value. 
+
+\medskip
+
+Clearly any user would be confused. Why would an \ttt{API} give you an option and then not document said option and actually do nothing with this option. Your first instinct would now be to contact  \textsc{WarcraftLogs}. So you write them an email and there response they send you back can be seen in \cref{fig:MailSupp}. So you go to their discord find the thread about the \ttt{API} and ask you question. The intention of this documentation is not to out anyone from their support team and therefore I will not share the conversion I had. But trust us when we say that if was probably the most useless information and support we have ever received. 
+
+\medskip
+
+So how did we fix it, you may ask? We looked at the documentation and again read what was written under the \ttt{difficulty} argument. The difficulty argument says it filter fights. So we then took a look at the \ttt{ReportFight} object. We tested this and sure enough it worked. So to simplify what we now have to do if we wish to get the event data only for \textsc{Mythic}. First we need to get all the fight data that had that difficulty i.e the \ttt{fightIDs}. This is done with the \ttt{ReportFlight} object. Then we have to sort our \ttt{ReportEventPaginator} to the \ttt{fightIDs}. Now we have used two calls of our 3.600 rate limit.
+
+\medskip
+
+In our demo in \textsc{Python} it became clear that we also had to pull a lot more data than just fight i.e pulls and so on. We now have to pull every single fiights, every single name from that fight and the event itself. This gives us a rough estimate:
+
+$$l\cdot\lf{a_{\text{Fights}}+a_{\text{Event}}+a_{\text{name}}\cdot p},$$
+where $p$ is the amount of players in any fights and $l$ is the amount of different logs we want to pull data from. Since we cannot get \ttt{fightIDs} whilst also getting the event to only get data from the mythics, we would need to do this over two separate calls and also we cannot pull names just from the event log the way we want it, so we have to do it separately. 
+
+\medskip
+
+This is probably the most irritating limit of the \ttt{API} and therefore we would need to make sure our software can handle this limit in case our request limit get met.
+
+
 \section{Integration from the \ttt{API} to C\ttt{\#}}
+
+
 
 \subsection{Authentication}
 
@@ -486,7 +537,24 @@ Therefore we will be using \ttt{GraphQL} library from \textsc{Graphql-dotnet}. M
 
 \section{\textsc{UML} Diagram}
 
+
 \newpage
+
+\appendix
+\chapter{Figures}
+
+\section{Pictures}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{mail1.PNG}
+\caption{Mail received from the support team at \textsc{WarcraftLogs}}
+\label{fig:MailSupp}
+\end{figure}
+
+
+\newpage
+
 
 \printbibliography
 \end{document}
