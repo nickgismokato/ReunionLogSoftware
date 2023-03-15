@@ -187,6 +187,7 @@
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \newcommand\ttt[1]{\texttt{#1}}
+\newcommand\tsc[1]{\textsc{#1}}
 
 %--------------------------------------------------------- CS Setup ---------------------------------------------------------
 
@@ -435,7 +436,7 @@ What described in \textbf{Section 1.1.1} sound really great and reasonable usefu
 
 The only need we have of the website is to check if the information we get is also the information displayed on the site.  
 
-\section{Documentation for the \ttt{API}}
+\section{Documentation for the \ttt{API}}\label{sec:Doc}
 
 The \ttt{API} and it's documentation is, for a lack of a better word, idiotic made. There exists two \ttt{API}'s. Version 1 and version 2. We will be using the latter. This version has "\textit{better}" documentation than it's counterpart and uses \textsc{OAuth 2.0} for it's \ttt{API} authentication. The documentation can be found two places. For authentication documentation you can find it at \cite{AuthLink} and you can find the actual command call documentation at \cite{DocLink}.
 
@@ -497,9 +498,19 @@ This is probably the most irritating limit of the \ttt{API} and therefore we wou
 
 \section{Integration from the \ttt{API} to C\ttt{\#}}
 
-
+As discussed in \ref{sec:Doc} it is clear that we would need many objects to handle everything involving \tsc{WarcraftLogs} \ttt{API} and it's authentication. Clearly we would need objects handling our query strings, \textit{all of them}, handling of the authentication and most importantly handling the data we receive after we have made a call, i.e the response.
 
 \subsection{Authentication}
+
+Creating an authentication for our software is actually quite easy. We don't need any libraries for the creation of the code or the requester. The only thing we need is an users \ttt{client\_id} and \ttt{client\_secret}. The \ttt{tokenURL} is a constant i.e "\textit{https://www.warcraftlogs.com/oauth/token}". Everything else is user input. This is also important but will be dealt with differently.
+
+\medskip
+
+We will need the user to create the \ttt{client\_id} and \ttt{client\_secret} which we will save as local data for further use. This will be done at first time use of the software.
+
+\subsection{Query Strings}
+
+When dealing with 
 
 \subsection{Data extracted from the \ttt{API}}
 
