@@ -1,16 +1,15 @@
 \documentclass[10pt, a4paper]{memoir}
-\aliaspagestyle{cleared}{plain}
 
 %--------------------------------------------------------- Style setup ---------------------------------------------------------
-
+\aliaspagestyle{cleared}{plain}
 
 %--------------------------------------------------------- Package Setup ---------------------------------------------------------
 
 \usepackage[utf8]{inputenc}
-%\usepackage{textcomp}
-%\usepackage{lmodern}
-%\usepackage[T1]{fontenc}
-\usepackage{amsmath, amsthm, amssymb}
+%\usepackage{textcomp} %Use for old MiKTex framework with updates packages
+%\usepackage{lmodern} %Modern font
+%\usepackage[T1]{fontenc} %T1 Font
+\usepackage{amsmath, amsthm, amssymb} %Gives math tools and environments
 \usepackage{mathtools} %Extensions to amsmath
 \usepackage{mathrsfs} %Provide \mathscr command
 \usepackage{nccmath} %Improve space of \displaybreak and more
@@ -44,18 +43,15 @@
 \usepackage{varwidth} %varwidth enviorment is minipage where width is a maximum value
 \usepackage{physics}
 \usepackage{nameref}%\nameref
-
 \usepackage{siunitx}
 \sisetup{exponent-product = \cdot,per-mode=reciprocal-positive-first}
-
 \usepackage{braket} %Add braket notation
 \addto\captionsdanish{%
 }
-
 \usepackage{hyperref} %Load last ALWAYS
-
 \usepackage{titlesec} %Change space of sections and subsections
 \usepackage{cleveref}
+\usepackage{pgfplots}
 
 
 %--------------------------------------------------------- Theorems setup ---------------------------------------------------------
@@ -89,7 +85,6 @@
 {\newline}%
 {1em}%
 {}%
-
 
 \makeatletter
 \renewenvironment{proof}[1][\proofname]{\par
@@ -140,26 +135,25 @@
 }
 \makeatother
 
-
 %\usepackage{ucs,babel} %No idea
 %\usepackage[all,cmtip]{xy} %No idea
 
 
-
 %--------------------------------------------------------- Own Definitions ---------------------------------------------------------
-\makeatother
+\makeatother %Create double underline
 \def\doubleunderline#1{\underline{\underline{#1}}}
 
-\makeatletter
+\makeatletter %Better arrays
 \renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
   \hskip -\arraycolsep
   \let\@ifnextchar\new@ifnextchar
   \array{#1}}
 \makeatother
 
+%Create equality symbol with some text variable that get set above the equation
 \newcommand\myeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
 
-\newcommand{\BAR}{%
+\newcommand{\BAR}{% Own bar definition
   \hspace{-\arraycolsep}%
   \strut\vrule % the `\vrule` is as high and deep as a strut
   \hspace{-\arraycolsep}%
@@ -188,9 +182,9 @@
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \newcommand\ttt[1]{\texttt{#1}}
 \newcommand\tsc[1]{\textsc{#1}}
+\newcommand{\CS}{C\nolinebreak\hspace{-.05em}\raisebox{.6ex}{\tiny \#}}
 
-%--------------------------------------------------------- CS Setup ---------------------------------------------------------
-
+%--------------------------------------------------------- Computer Science Setup ---------------------------------------------------------
 
 \usepackage{forest}
 \usepackage{adjustbox}
@@ -243,9 +237,6 @@
 
 \usepackage[newfloat]{minted}
 
-
-
-
 \definecolor{mauve}{HTML}{E0B0FF}
 \lstset{
   language=R,
@@ -265,10 +256,8 @@
   stringstyle=\color{mauve}
 }
 
-
 \definecolor{codegray}{gray}{0.85}
 \newcommand{\codes}[1]{\colorbox{codegray}{\texttt{#1}}}
-
 
 \definecolor{block-gray}{gray}{0.85}
 \newtcolorbox{myquote}{colback=block-gray,grow to right by=-10mm,grow to left by=-10mm,
@@ -289,29 +278,21 @@ boxrule=0pt,boxsep=0pt,breakable}
 \usepackage{chngcntr}
 \counterwithin{Exercise}{section}
 
-%Move exercise to left side
-%\renewcommand{\ExerciseHeader}{%
-%  \par\noindent
-%  \textbf{\large \ExerciseName \ \ExerciseHeaderNB\ExerciseHeaderTitle\ExerciseHeaderOrigin}%
-%  \par\nopagebreak\medskip
-%}
+
+
+%--------------------------------------------------------- Tikz setup ---------------------------------------------------------
+
+\usetikzlibrary{positioning}
+
+
+%--------------------------------------------------------- Beginning of document ---------------------------------------------------------
 \setlength\parindent{0pt}
 
 \renewcommand{\ExerciseHeader}{\large\textbf{\ExerciseName~\ExerciseHeaderNB} \smallskip\newline}
 \renewcommand{\AtBeginExercise}{\hspace{-0.66em}}
-
 \renewcommand{\AnswerHeader}{\large\textbf{\AnswerName~\ExerciseHeaderNB}\smallskip\newline}
-
 \setlength\AnswerSkipBefore{1em}
 
-\usepackage{pgfplots}
-\usetikzlibrary{positioning}
-
-\newcommand{\CS}{C\nolinebreak\hspace{-.05em}\raisebox{.6ex}{\tiny \#}}
-
-
-
-%--------------------------------------------------------- Beginning of document ---------------------------------------------------------
 
 \setlength\arraycolsep{2 pt}
 \setcounter{tocdepth}{2}
@@ -354,7 +335,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 \maketitle
 	{\scshape\LARGE \LaTeX \par}
 	\vspace{0.5cm}
-	{Main Programmer and lead Designer - \Large\scshape Nickgismokato\par}
+	{Lead Programmer and Lead Designer - \Large\scshape Nickgismokato\par}
 	\vspace{0.3cm}
 	{Design contributor - \Large\scshape Bj\par}
 	\vspace{0.3cm}
@@ -510,7 +491,13 @@ We will need the user to create the \ttt{client\_id} and \ttt{client\_secret} wh
 
 \subsection{Query Strings}
 
-When dealing with 
+When dealing with query strings within this \ttt{API}, you are in fact dealing with a \ttt{json} call within the \tsc{GraphQL} schema. As noted in \textbf{Section 1.2.1 GraphQL}, we will be using the \ttt{GraphQL} library from \ttt{Graphql-dotnet} (\cite{GQLdotnet}). This library is also under the \tsc{MIT} license, so no issue in license agreements here. It is important to note that \tsc{Facebook} created \tsc{GraphQL}. This library is just an implementation to \tsc{.NET}. You can easily install it by the following command:
+
+\begin{minted}{bash}
+$ dotnet add package GraphQL
+\end{minted}
+
+This is the only package needed for this library. We don't need serialization or document cashing since we will implement it ourself if needed. 
 
 \subsection{Data extracted from the \ttt{API}}
 
