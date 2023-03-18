@@ -501,17 +501,58 @@ This is the only package needed for this library. We don't need serialization or
 
 \subsection{Data extracted from the \ttt{API}}
 
+After we have made a call, you would think we are done. Clearly this isn't the case. The \ttt{JSON} is what our call return. This data is not just a "pure" \ttt{JSON} string. It has layers within its own index. Therefore we need to go through these index layers if we wish to get to the actual data we need. This could either be implemented in the call function or in it's own class.
+
+\medskip
+
+We will implement this within its own class. The main reason is we don't want to give the call object that responsibility. That lies solely within the respected event objects. 
+
 \newpage
 
 \chapter{Our software main requirements}
 
 \section*{Abstract}
 
+In this chapter we will go through all our requirements for our software. This will be done in a list form. This chapter will not be dealing with the responsibilities within the objects. 
+
 \section{Authentication}
+
+The authentication part of the software has the following requirements:
+
+\begin{itemize}[noitemsep, topsep=1pt]
+\item Create an authentication call
+\item Use the \ttt{client\_id} and \ttt{client\_secret} for the authentication call
+\item Create some \ttt{.credential.JSON} file to hold the credentials we get from authentication call
+\item If multiple calls is made to the \ttt{API}, it should be able to use the \ttt{.credential.JSON}
+\item Delete \ttt{.credential.JSON} when program is stopped.
+\end{itemize}
+
+Further more, it should have/use the following:
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item Be a static class, maybe with some other type of classes (depends of the rest of the design).
+\item Check if \ttt{client\_id} and \ttt{client\_secret} is given. If not then it should prompt a creation page
+\item Hold a boolean value \ttt{createdCredentials} and it should use it to check whether or not the \ttt{.credential.JSON} has been created or exists
+\item Have a custom exception if authentication failed and should print the exception
+\item If an error was returned from the \ttt{API} it should also handle the error with an exception. 
+\end{itemize}
 
 \section{Events}
 
 \section{Query Strings }
+
+The query string part has the following requirements:
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item Create a \ttt{JSON String} type to cast to the event call of the software
+\item Handle different Master type objects from the \ttt{API}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item This should be handled with a switch and using an \ttt{enum} object.
+\item This should handle any error with an exception if wrong or non existing arguments is given.
+\end{itemize}
+\item It will never hold the \ttt{JSON String} type. Only create and then return it
+
+\end{itemize}
 
 \section{\ttt{.CSV} file}
 
