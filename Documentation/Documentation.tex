@@ -551,10 +551,51 @@ The query string part has the following requirements:
 \item This should handle any error with an exception if wrong or non existing arguments is given.
 \end{itemize}
 \item It will never hold the \ttt{JSON String} type. Only create and then return it
+\end{itemize}
 
+Further more, it should have/use the following:
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item Use \ttt{enum}'s to handle different \ttt{API} types
+	\begin{itemize}[noitemsep,topsep=1pt]
+	\item The \ttt{enum}'s should be contained in the same \ttt{namespace} as the query string or should have it own
+	\item The \ttt{enum}'s value holder should not be used
+	\item The default value of the \ttt{enum}'s should return either \ttt{null} or some other empty value types
+	\end{itemize}
+\item It should be as agile as possible i.e it should follow the \tsc{O} principle in \tsc{SOLID}
+\item If it need to handle mutation of strings or value not a query, it should not handle it but instead call a function that mutate it
+\item It has to throw exceptions if either
+	\begin{itemize}[noitemsep,topsep=1pt]
+	\item Important query values is missing
+	\item default value from enums is received
+	\item Any errors are thrown
+	\end{itemize}
+\item No default query string should be returned if any error or exception is detected. It should instead return \ttt{null}.
 \end{itemize}
 
 \section{\ttt{.CSV} file}
+
+The most important part of the \ttt{.csv} file is not that we can use the software you change the design but instead that it is consistent with what design is used if multiple (\textit{or single}) query's are used.
+
+\medskip
+
+It is important that this software is meant for the \tsc{Reunion} guild and not for all guilds that want to use this software. That being said, we would still make the design part of the \ttt{.csv} handler/creator easy to redo and redesign on. Therefore we would have:
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item The creation of the \ttt{.csv} files should be handled by a static object called \ttt{CreateCSVFile}
+\item This object should not hold any data, but instead be given the necessary date from the event object after it has received the data.
+\item It shouldn't have the need to manipulate the data but instead send the data of to me mutated into the necessary data needed to create the \ttt{.csv} data
+	\begin{itemize}[noitemsep,topsep=1pt]
+	\item[\textbf{Note: }] This is why we use a static class since we should be able to create multiple \ttt{.csv} files in one run or multiple runs where no exist of the software has happen. This is also more memory safe for the program
+	\item[\textbf{Note: }] Best practice would dictate us to create an \ttt{eventHandler} to handle these multiple calls but since this is a static class living in the \ttt{Main} class of our program, no real usage or performance gain would come of such practices
+	\end{itemize}
+\item If it encounter an error for any reason, no \ttt{.csv} files should be created. Instead a \ttt{.log} file should be created and show where in the process it was interrupted
+	\begin{itemize}[noitemsep,topsep=1pt]
+	\item[\textbf{Note: }] This log should be created every time but should be deleted if no exception was thrown or no error was detected
+	\item[\textbf{Note: }] A debug option should exists in the software to determine whether or not the \ttt{.log} file should be deleted after successfully handling a creation call
+	\item[\textbf{Note: }] If option to not delete the \ttt{.log} files, then it need to call the different files some different from each other. The reason is we don't want to overwrite previously written \ttt{.log} files and we want a way to distinguished the different files. 
+	\end{itemize}
+\end{itemize}
 
 \newpage
 
