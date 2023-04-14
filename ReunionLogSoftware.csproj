@@ -19,6 +19,10 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="GraphQL" Version="7.3.1" />
+    <PackageReference Include="GraphQL.NewtonsoftJson" Version="7.3.1" />
+    <PackageReference Include="GraphQL.Query.Builder" Version="2.0.1" />
+    <PackageReference Include="GraphQL.SystemTextJson" Version="7.3.1" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
   </ItemGroup>

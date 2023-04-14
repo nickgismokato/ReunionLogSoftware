@@ -24,3 +24,9 @@
 /home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/obj/Debug/net6.0/ReunionLogSoftware.pdb
 /home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/obj/Debug/net6.0/ReunionLogSoftware.genruntimeconfig.cache
 /home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/bin/Debug/net6.0/Content/Test.xnb
+/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/bin/Debug/net6.0/GraphQL.dll
+/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/bin/Debug/net6.0/GraphQLParser.dll
+/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/bin/Debug/net6.0/GraphQL.NewtonsoftJson.dll
+/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/bin/Debug/net6.0/GraphQL.SystemTextJson.dll
+/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/bin/Debug/net6.0/Newtonsoft.Json.dll
+/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/bin/Debug/net6.0/GraphQL.Query.Builder.dll

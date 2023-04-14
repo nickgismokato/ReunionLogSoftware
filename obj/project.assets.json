@@ -2,6 +2,62 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "GraphQL/7.3.1": {
+        "type": "package",
+        "dependencies": {
+          "GraphQL-Parser": "8.1.0"
+        },
+        "compile": {
+          "lib/net6.0/GraphQL.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/GraphQL.dll": {}
+        }
+      },
+      "GraphQL-Parser/8.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/GraphQLParser.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/GraphQLParser.dll": {}
+        }
+      },
+      "GraphQL.NewtonsoftJson/7.3.1": {
+        "type": "package",
+        "dependencies": {
+          "GraphQL": "[7.3.1, 8.0.0)",
+          "Newtonsoft.Json": "13.0.3",
+          "System.Buffers": "4.5.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/GraphQL.NewtonsoftJson.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/GraphQL.NewtonsoftJson.dll": {}
+        }
+      },
+      "GraphQL.Query.Builder/2.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/GraphQL.Query.Builder.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/GraphQL.Query.Builder.dll": {}
+        }
+      },
+      "GraphQL.SystemTextJson/7.3.1": {
+        "type": "package",
+        "dependencies": {
+          "GraphQL": "[7.3.1, 8.0.0)"
+        },
+        "compile": {
+          "lib/net6.0/GraphQL.SystemTextJson.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/GraphQL.SystemTextJson.dll": {}
+        }
+      },
       "MonoGame.Content.Builder.Task/3.8.1.303": {
         "type": "package",
         "build": {
@@ -54,10 +110,122 @@
             "rid": "win-x86"
           }
         }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "System.Buffers/4.5.1": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/_._": {}
+        }
       }
     }
   },
   "libraries": {
+    "GraphQL/7.3.1": {
+      "sha512": "rCtFy7qqbjUQ11Vc+UP0xuwc+TfRl6ojqsD/8BhmY2zno20E+Z4u0eDoL0FaB2WZLmhoxpkRCN+SRNYUuOn7rQ==",
+      "type": "package",
+      "path": "graphql/7.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "graphql.7.3.1.nupkg.sha512",
+        "graphql.nuspec",
+        "lib/net5.0/GraphQL.dll",
+        "lib/net5.0/GraphQL.xml",
+        "lib/net6.0/GraphQL.dll",
+        "lib/net6.0/GraphQL.xml",
+        "lib/netstandard2.0/GraphQL.dll",
+        "lib/netstandard2.0/GraphQL.xml",
+        "lib/netstandard2.1/GraphQL.dll",
+        "lib/netstandard2.1/GraphQL.xml",
+        "logo.64x64.png"
+      ]
+    },
+    "GraphQL-Parser/8.1.0": {
+      "sha512": "tGSA8V7iqgHLcyyeZwUsElbboKFqNLerewExyCsDqCqCexM50ktx5lBMXwPJjt0QFX0aI5H/HmJLyiQdFnx/cg==",
+      "type": "package",
+      "path": "graphql-parser/8.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "graphql-parser.8.1.0.nupkg.sha512",
+        "graphql-parser.nuspec",
+        "lib/net6.0/GraphQLParser.dll",
+        "lib/net6.0/GraphQLParser.xml",
+        "lib/netstandard2.0/GraphQLParser.dll",
+        "lib/netstandard2.0/GraphQLParser.xml",
+        "lib/netstandard2.1/GraphQLParser.dll",
+        "lib/netstandard2.1/GraphQLParser.xml",
+        "logo.64x64.png"
+      ]
+    },
+    "GraphQL.NewtonsoftJson/7.3.1": {
+      "sha512": "+9GdXd0faRDKRTAr6i66U9qQzIs2S0dPvPU4cT5lhs/w6RXnbMMOaNwLL3P5e46h6Mi3tMEYHfZW6o0eu8tOOA==",
+      "type": "package",
+      "path": "graphql.newtonsoftjson/7.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "graphql.newtonsoftjson.7.3.1.nupkg.sha512",
+        "graphql.newtonsoftjson.nuspec",
+        "lib/netstandard2.0/GraphQL.NewtonsoftJson.dll",
+        "lib/netstandard2.0/GraphQL.NewtonsoftJson.xml",
+        "logo.64x64.png"
+      ]
+    },
+    "GraphQL.Query.Builder/2.0.1": {
+      "sha512": "6ZSKoSE6ZAUhnLKUeA4fbvKVt9eRQU5pxmxHIowKjgIQdmMxwWFXJZii3dR6WQAR30Omrr+ljH3Pqu1wKc6w7Q==",
+      "type": "package",
+      "path": "graphql.query.builder/2.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE/LICENSE",
+        "README.md",
+        "graphql.query.builder.2.0.1.nupkg.sha512",
+        "graphql.query.builder.nuspec",
+        "lib/netstandard2.0/GraphQL.Query.Builder.dll",
+        "lib/netstandard2.0/GraphQL.Query.Builder.xml",
+        "logo.png"
+      ]
+    },
+    "GraphQL.SystemTextJson/7.3.1": {
+      "sha512": "GB3lwmmUjGk2ibo4jU28GeQiUTpwB1+m7t/ERL/PYfseulNIkLeSNQD7aEE0gXFjUJX1VhRZSmhdl7hoX5InZA==",
+      "type": "package",
+      "path": "graphql.systemtextjson/7.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "graphql.systemtextjson.7.3.1.nupkg.sha512",
+        "graphql.systemtextjson.nuspec",
+        "lib/net5.0/GraphQL.SystemTextJson.dll",
+        "lib/net5.0/GraphQL.SystemTextJson.xml",
+        "lib/net6.0/GraphQL.SystemTextJson.dll",
+        "lib/net6.0/GraphQL.SystemTextJson.xml",
+        "lib/netcoreapp3.1/GraphQL.SystemTextJson.dll",
+        "lib/netcoreapp3.1/GraphQL.SystemTextJson.xml",
+        "lib/netstandard2.0/GraphQL.SystemTextJson.dll",
+        "lib/netstandard2.0/GraphQL.SystemTextJson.xml",
+        "lib/netstandard2.1/GraphQL.SystemTextJson.dll",
+        "lib/netstandard2.1/GraphQL.SystemTextJson.xml",
+        "logo.64x64.png"
+      ]
+    },
     "MonoGame.Content.Builder.Task/3.8.1.303": {
       "sha512": "9Ilzzje62LhWElbPNEl7vh7XsRSbze+lvCJdZtTZUGu48FRgvYN6THURwIB9PN98EI33/Wnf6iuShNUtD7hL4Q==",
       "type": "package",
@@ -93,16 +261,82 @@
         "runtimes/win-x86/native/SDL2.dll",
         "runtimes/win-x86/native/soft_oal.dll"
       ]
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "System.Buffers/4.5.1": {
+      "sha512": "Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg==",
+      "type": "package",
+      "path": "system.buffers/4.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Buffers.dll",
+        "lib/net461/System.Buffers.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.1/System.Buffers.dll",
+        "lib/netstandard1.1/System.Buffers.xml",
+        "lib/netstandard2.0/System.Buffers.dll",
+        "lib/netstandard2.0/System.Buffers.xml",
+        "lib/uap10.0.16299/_._",
+        "ref/net45/System.Buffers.dll",
+        "ref/net45/System.Buffers.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.1/System.Buffers.dll",
+        "ref/netstandard1.1/System.Buffers.xml",
+        "ref/netstandard2.0/System.Buffers.dll",
+        "ref/netstandard2.0/System.Buffers.xml",
+        "ref/uap10.0.16299/_._",
+        "system.buffers.4.5.1.nupkg.sha512",
+        "system.buffers.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "GraphQL >= 7.3.1",
+      "GraphQL.NewtonsoftJson >= 7.3.1",
+      "GraphQL.Query.Builder >= 2.0.1",
+      "GraphQL.SystemTextJson >= 7.3.1",
       "MonoGame.Content.Builder.Task >= 3.8.1.303",
       "MonoGame.Framework.DesktopGL >= 3.8.1.303"
     ]
   },
   "packageFolders": {
-    "/home/nickgismokato/.nuget/packages/": {}
+    "/home/nickgismokato/.nuget/packages/": {},
+    "/home/nickgismokato/.local/share/godot/mono/GodotNuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
@@ -113,8 +347,12 @@
       "packagesPath": "/home/nickgismokato/.nuget/packages/",
       "outputPath": "/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/obj/",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "/home/nickgismokato/.local/share/godot/mono/GodotNuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "/home/nickgismokato/.nuget/NuGet/NuGet.Config"
+        "/home/nickgismokato/.nuget/NuGet/NuGet.Config",
+        "/home/nickgismokato/.nuget/NuGet/config/Godot.Offline.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -138,6 +376,22 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "GraphQL": {
+            "target": "Package",
+            "version": "[7.3.1, )"
+          },
+          "GraphQL.NewtonsoftJson": {
+            "target": "Package",
+            "version": "[7.3.1, )"
+          },
+          "GraphQL.Query.Builder": {
+            "target": "Package",
+            "version": "[2.0.1, )"
+          },
+          "GraphQL.SystemTextJson": {
+            "target": "Package",
+            "version": "[7.3.1, )"
+          },
           "MonoGame.Content.Builder.Task": {
             "target": "Package",
             "version": "[3.8.1.303, )"
@@ -162,7 +416,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.113/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.116/RuntimeIdentifierGraph.json"
       }
     }
   }
