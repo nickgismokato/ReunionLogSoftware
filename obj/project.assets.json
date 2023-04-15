@@ -8,19 +8,27 @@
           "GraphQL-Parser": "8.1.0"
         },
         "compile": {
-          "lib/net6.0/GraphQL.dll": {}
+          "lib/net6.0/GraphQL.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/GraphQL.dll": {}
+          "lib/net6.0/GraphQL.dll": {
+            "related": ".xml"
+          }
         }
       },
       "GraphQL-Parser/8.1.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/GraphQLParser.dll": {}
+          "lib/net6.0/GraphQLParser.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/GraphQLParser.dll": {}
+          "lib/net6.0/GraphQLParser.dll": {
+            "related": ".xml"
+          }
         }
       },
       "GraphQL.NewtonsoftJson/7.3.1": {
@@ -31,19 +39,27 @@
           "System.Buffers": "4.5.1"
         },
         "compile": {
-          "lib/netstandard2.0/GraphQL.NewtonsoftJson.dll": {}
+          "lib/netstandard2.0/GraphQL.NewtonsoftJson.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/GraphQL.NewtonsoftJson.dll": {}
+          "lib/netstandard2.0/GraphQL.NewtonsoftJson.dll": {
+            "related": ".xml"
+          }
         }
       },
       "GraphQL.Query.Builder/2.0.1": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/GraphQL.Query.Builder.dll": {}
+          "lib/netstandard2.0/GraphQL.Query.Builder.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/GraphQL.Query.Builder.dll": {}
+          "lib/netstandard2.0/GraphQL.Query.Builder.dll": {
+            "related": ".xml"
+          }
         }
       },
       "GraphQL.SystemTextJson/7.3.1": {
@@ -52,10 +68,14 @@
           "GraphQL": "[7.3.1, 8.0.0)"
         },
         "compile": {
-          "lib/net6.0/GraphQL.SystemTextJson.dll": {}
+          "lib/net6.0/GraphQL.SystemTextJson.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/GraphQL.SystemTextJson.dll": {}
+          "lib/net6.0/GraphQL.SystemTextJson.dll": {
+            "related": ".xml"
+          }
         }
       },
       "MonoGame.Content.Builder.Task/3.8.1.303": {
@@ -114,10 +134,14 @@
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
-          "lib/net6.0/Newtonsoft.Json.dll": {}
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/Newtonsoft.Json.dll": {}
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Buffers/4.5.1": {
@@ -335,29 +359,31 @@
     ]
   },
   "packageFolders": {
-    "/home/nickgismokato/.nuget/packages/": {},
-    "/home/nickgismokato/.local/share/godot/mono/GodotNuGetFallbackFolder": {}
+    "C:\\Users\\nicka\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/ReunionLogSoftware.csproj",
+      "projectUniqueName": "C:\\Users\\nicka\\Documents\\Projects\\CSharp\\ReunionLogSoftware\\ReunionLogSoftware.csproj",
       "projectName": "ReunionLogSoftware",
-      "projectPath": "/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/ReunionLogSoftware.csproj",
-      "packagesPath": "/home/nickgismokato/.nuget/packages/",
-      "outputPath": "/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/obj/",
+      "projectPath": "C:\\Users\\nicka\\Documents\\Projects\\CSharp\\ReunionLogSoftware\\ReunionLogSoftware.csproj",
+      "packagesPath": "C:\\Users\\nicka\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nicka\\Documents\\Projects\\CSharp\\ReunionLogSoftware\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/home/nickgismokato/.local/share/godot/mono/GodotNuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "/home/nickgismokato/.nuget/NuGet/NuGet.Config",
-        "/home/nickgismokato/.nuget/NuGet/config/Godot.Offline.Config"
+        "C:\\Users\\nicka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -407,7 +433,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -416,7 +443,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.116/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.408\\RuntimeIdentifierGraph.json"
       }
     }
   }
