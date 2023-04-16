@@ -23,7 +23,7 @@ namespace ReunionLogSoftware.States{
             return Debug.instance;
         }
         public Debug(GraphicsDevice graphicsDevice):base(graphicsDevice){
-
+            Debug.instance = this;
         }
 
         public override void Initialize(){

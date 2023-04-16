@@ -24,11 +24,11 @@ namespace ReunionLogSoftware.States{
         }
 
         public MainMenu(GraphicsDevice graphicsDevice):base(graphicsDevice){
-
+            MainMenu.instance = this;
         }
 
         public override void Initialize(){
-            //
+            
         }
 
         public override void LoadContent(ContentManager content){

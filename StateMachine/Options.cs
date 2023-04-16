@@ -22,7 +22,7 @@ namespace ReunionLogSoftware.States{
             return Options.instance;
         }
         public Options(GraphicsDevice graphicsDevice):base(graphicsDevice){
-
+            Options.instance = this;
         }
 
         public override void Initialize(){
