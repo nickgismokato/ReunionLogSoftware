@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/nicka/Documents/Projects/CSharp/ReunionLogSoftware/Content/Test.spritefont</SourceFile>
-  <SourceTime>2023-03-12T17:57:28.8252664+01:00</SourceTime>
-  <DestFile>C:/Users/nicka/Documents/Projects/CSharp/ReunionLogSoftware/Content/bin/DesktopGL/Content/Test.xnb</DestFile>
-  <DestTime>2023-04-16T18:49:03.0108251+02:00</DestTime>
+  <SourceFile>/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/Content/Test.spritefont</SourceFile>
+  <SourceTime>2023-03-10T18:05:33.2859418+01:00</SourceTime>
+  <DestFile>/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/Content/bin/DesktopGL/Content/Test.xnb</DestFile>
+  <DestTime>2023-04-16T19:19:34.6053396+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

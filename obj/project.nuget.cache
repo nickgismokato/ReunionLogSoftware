@@ -1,18 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "/9+sC8+wbwaQ0g2iIutYc16u/cbrWog9bQi5DbDOkV1fL+W2iBaotgC/2GyBi9rB4Mj9U1DZYk4HQBN5S3qy3g==",
+  "dgSpecHash": "5xp9jE9WR2p5S/VTQxpmbc/fMewvOX+nyPh+mWJmvuGPY2D/te5Nrj9mLI3+t4NhxAK+nT3iOKzo21ZOyBUwSg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nicka\\Documents\\Projects\\CSharp\\ReunionLogSoftware\\ReunionLogSoftware.csproj",
+  "projectFilePath": "/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/ReunionLogSoftware.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\nicka\\.nuget\\packages\\graphql\\7.3.1\\graphql.7.3.1.nupkg.sha512",
-    "C:\\Users\\nicka\\.nuget\\packages\\graphql-parser\\8.1.0\\graphql-parser.8.1.0.nupkg.sha512",
-    "C:\\Users\\nicka\\.nuget\\packages\\graphql.newtonsoftjson\\7.3.1\\graphql.newtonsoftjson.7.3.1.nupkg.sha512",
-    "C:\\Users\\nicka\\.nuget\\packages\\graphql.query.builder\\2.0.1\\graphql.query.builder.2.0.1.nupkg.sha512",
-    "C:\\Users\\nicka\\.nuget\\packages\\graphql.systemtextjson\\7.3.1\\graphql.systemtextjson.7.3.1.nupkg.sha512",
-    "C:\\Users\\nicka\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
-    "C:\\Users\\nicka\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
-    "C:\\Users\\nicka\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
-    "C:\\Users\\nicka\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512"
+    "/home/nickgismokato/.nuget/packages/graphql/7.3.1/graphql.7.3.1.nupkg.sha512",
+    "/home/nickgismokato/.nuget/packages/graphql-parser/8.1.0/graphql-parser.8.1.0.nupkg.sha512",
+    "/home/nickgismokato/.nuget/packages/graphql.newtonsoftjson/7.3.1/graphql.newtonsoftjson.7.3.1.nupkg.sha512",
+    "/home/nickgismokato/.nuget/packages/graphql.query.builder/2.0.1/graphql.query.builder.2.0.1.nupkg.sha512",
+    "/home/nickgismokato/.nuget/packages/graphql.systemtextjson/7.3.1/graphql.systemtextjson.7.3.1.nupkg.sha512",
+    "/home/nickgismokato/.nuget/packages/monogame.content.builder.task/3.8.1.303/monogame.content.builder.task.3.8.1.303.nupkg.sha512",
+    "/home/nickgismokato/.nuget/packages/monogame.framework.desktopgl/3.8.1.303/monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
+    "/home/nickgismokato/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
+    "/home/nickgismokato/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512"
   ],
   "logs": []
 }
