@@ -21,6 +21,7 @@ namespace ReunionLogSoftware.GraphControl{
                 .AddField(h => h.Id);
             string queryString = query.Build();
             System.Console.WriteLine("{" + queryString + "}");
+            System.Diagnostics.Debug.WriteLine("{" + queryString + "}");
         } 
     }
 }
