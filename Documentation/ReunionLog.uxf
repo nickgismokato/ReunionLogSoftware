@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>485</x>
+      <y>60</y>
+      <w>90</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+/Event/
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>120</y>
+      <w>50</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>DeathEvent
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>90</y>
+      <w>15</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+layer=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>460</y>
+      <w>275</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+Event
+--
+-url: String
+-difficulty: Difficulty(enum)
+-names: &lt;String(JSON)&gt;[]
+-namesList: String[]
+-pulls: &lt;String, Int&gt;[]
+-endTime: Long
+-date: String
+-deathJSON: String&lt;JSON&gt;
+-deathList: &lt;String, String, Int&gt;[]
+-actors: Character[]
+-csvString: String[]
+--
+-CreateDeathList(deathJSON: String&lt;JSON&gt;): &lt;String, String, Int&gt;[]
+-CreateNameList(names: &lt;String(JSON)&gt;[]): String[]
+-CreateActors(UNKOWN): Character[]
+--
+Responsibilities
+-- Hold DATA for event
+-- Everything else should be calculated
+somewhere else by callingmfunctions and
+classes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>325</x>
+      <y>690</y>
+      <w>245</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+Character
+--
+-name: String
+-death: &lt;String, Int&gt;[]
+-fullList: &lt;String, &lt;String, Int&gt;[]&gt;
+--
+-ReturnFullList(void): &lt;String, &lt;String, Int&gt;[]&gt;
+--
+Responsibilities
+-- Handle Individuelly charecters DATA</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>445</x>
+      <y>635</y>
+      <w>200</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+</panel_attributes>
+    <additional_attributes>380.0;10.0;380.0;60.0;10.0;60.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>655</x>
+      <y>690</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+CSVStrings
+--
+-actors: Character[]
+-eventString: String
+-actorsString: String[]
+--
+-CreateCharacterStrings(actors: Character[]): String[]
+-CreateEventString(url: String, date: String): String[]
+-ReturnCSVString(void): String[]
+--
+Responsibilities
+-- Create CSV String Elements
+*-- Doesn't create CSV File*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>635</y>
+      <w>140</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;260.0;60.0;260.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>340</y>
+      <w>150</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Class&gt;&gt;
+InitData
+{Holds Initial Data}
+--
+-raidNames: &lt;String[]&gt;[]
+-mechanics: String[]
+-publicURL: String
+-standardCSVString: String
+--
+
+--
+Responsibilities
+-- Holds All Data That is know
+*-- Doesn't do anything else but that*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>785</x>
+      <y>440</y>
+      <w>120</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;500.0;10.0;420.0;220.0;420.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>350</y>
+      <w>155</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Function&gt;&gt;
+Main
+--
+-events: Event&lt;Class&gt;[]
+-initDataClass: InitData&lt;Class&gt;
+--
+1. Create All Events
+2. Call the static class CreateCSVFile 
+    to then create the CSV File
+3. Close the connection to WarcraftLogs
+--
+Responsibilities
+-- MainRuntime for everything</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>440</y>
+      <w>15</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>405</y>
+      <w>140</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>915</x>
+      <y>485</y>
+      <w>105</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ENum&gt;&gt;
+Difficulty
+--
+-LFR: 1
+-NORMAL: 2
+-HC: 3
+-MYTHIC: 4
+-Default: 0
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>520</y>
+      <w>155</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;290.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>235</x>
+      <y>370</y>
+      <w>255</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Static&gt;&gt;
+CreateCSVFile
+--
+/Unknow/
+--
+#CreateCSVFile(events: Event&lt;Class&gt;[]: Object, 
+                               InitData&lt;Class&gt;.standardCSVString: Object.String)
+--
+Responsibilities
+-- CreateCSV</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>485</x>
+      <y>405</y>
+      <w>65</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>305</x>
+      <y>25</y>
+      <w>85</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ENum&gt;&gt;
+QDataType
+--
+- CharacterData: 1
+- GameData: 2
+- GuildData: 3
+- ProgressRaceData: 4
+- RateLimitData: 5
+- ReportData: 6
+- UserData: 7
+- ViewModels: 8
+- WorldData: 9
+- Default: 0
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>230</x>
+      <y>25</y>
+      <w>65</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ENum&gt;&gt;
+Difficulty
+--
+-LFR: 1
+-NORMAL: 2
+-HC: 3
+-MYTHIC: 4
+-Default: 0
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>185</y>
+      <w>245</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Function&gt;&gt;
+CreateQuerryString
+--
+- 
+--
+- CheckDataType(Type: &lt;Enum&gt;QDataType): String
+- CreateQuerryString(Type: &lt;Enum&gt;QDataType, PublicURL: String,
+                                  *kwargs: &lt;Array&gt;[](String)): String
+--
+Responsibilities
+*-- Create All Querry Strings*
+-- Check Data Enum Type being casted
+-- Correctly cast string depended of *kwargs</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>255</x>
+      <y>90</y>
+      <w>30</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0;40.0;120.0;40.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>130</x>
+      <y>0</y>
+      <w>590</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>ReunionLog
+--
+
+bg=gray
+fg=black</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>125</y>
+      <w>90</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>160.0;10.0;160.0;50.0;10.0;50.0;10.0;120.0</additional_attributes>
+  </element>
+</diagram>
