@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/3833561/why-doesnt-git-ignore-my-specified-file

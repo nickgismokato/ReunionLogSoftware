@@ -42,3 +42,6 @@ Thumbs.db
 # Folders #
 ###########
 bin/**
+
+*.editorconfig
+*.cache
