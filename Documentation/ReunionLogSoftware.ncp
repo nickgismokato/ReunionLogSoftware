@@ -1,0 +1,295 @@
+<Project>
+  <Name>ReunionLogSoftware</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.ClassDiagram" assembly="NClass.DiagramEditor, Version=2.8.0.2, Culture=neutral, PublicKeyToken=null">
+    <Name>Full View</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>StateManager</Name>
+        <Access>Public</Access>
+        <Location left="1184" top="355" />
+        <Size width="316" height="281" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private static StateManager _instance</Member>
+        <Member type="Field">Stack&lt;GameState&gt; _screens = new Stack&lt;GameState&gt;()</Member>
+        <Member type="Field">private ContentManager _content</Member>
+        <Member type="Field">public static StateManager Instance</Member>
+        <Member type="Method">public void SetContent(ContentManager content)</Member>
+        <Member type="Method">public void AddScreen(GameState screen)</Member>
+        <Member type="Method">public void RemoveScreen()</Member>
+        <Member type="Method">public void ClearScreen()</Member>
+        <Member type="Method">public void ChangeScreen(GameState screen)</Member>
+        <Member type="Method">public void Update(GameTime gameTime)</Member>
+        <Member type="Method">public void Draw(SpriteBatch spriteBatch)</Member>
+        <Member type="Method">public void UnloadContent()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IState</Name>
+        <Access>Public</Access>
+        <Location left="584" top="221" />
+        <Size width="253" height="146" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void Initialize()</Member>
+        <Member type="Method">void LoadContent(ContentManager content)</Member>
+        <Member type="Method">void UnloadContent()</Member>
+        <Member type="Method">void Update(GameTime gameTime)</Member>
+        <Member type="Method">void Draw(SpriteBatch spriteBatch)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>Main</Name>
+        <Access>Public</Access>
+        <Location left="1801" top="175" />
+        <Size width="233" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private static Main self</Member>
+        <Member type="Field">private GraphicsDeviceManager _graphics</Member>
+        <Member type="Field">private SpriteBatch spriteBatch</Member>
+        <Member type="Method">public void SessionExit()</Member>
+        <Member type="Method">public void ChangeState(StateType stateType)</Member>
+        <Member type="Method">protected override void Initialize()</Member>
+        <Member type="Method">protected override void LoadContent()</Member>
+        <Member type="Method">protected override void UnloadContent()</Member>
+        <Member type="Method">protected override void Update(GameTime gameTime)</Member>
+        <Member type="Method">protected override void Draw(GameTime gameTime)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>StateType</Name>
+        <Access>Public</Access>
+        <Location left="1424" top="188" />
+        <Size width="163" height="129" />
+        <Collapsed>False</Collapsed>
+        <Value>MainMenu</Value>
+        <Value>Options</Value>
+        <Value>Run</Value>
+        <Value>Debug</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>Debug</Name>
+        <Access>Public</Access>
+        <Location left="1028" top="741" />
+        <Size width="309" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">static Debug instance = null</Member>
+        <Member type="Field">int choicePos = 0</Member>
+        <Member type="Field">SpriteFont testFont</Member>
+        <Member type="Constructor">public Debug(GraphicsDevice graphicsDevice)</Member>
+        <Member type="Method">public static MainMenu GetInstance(GraphicsDevice graphicsDevice)</Member>
+        <Member type="Method">public override void Initialize()</Member>
+        <Member type="Method">public override void LoadContent(ContentManager content)</Member>
+        <Member type="Method">public override void UnloadContent()</Member>
+        <Member type="Method">public override void Update(GameTime gameTime)</Member>
+        <Member type="Method">public override void Draw(SpriteBatch spriteBatch)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Run</Name>
+        <Access>Public</Access>
+        <Location left="708" top="741" />
+        <Size width="309" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">static Run instance = null</Member>
+        <Member type="Field">int choicePos = 0</Member>
+        <Member type="Field">SpriteFont testFont</Member>
+        <Member type="Constructor">public Run(GraphicsDevice graphicsDevice)</Member>
+        <Member type="Method">public static MainMenu GetInstance(GraphicsDevice graphicsDevice)</Member>
+        <Member type="Method">public override void Initialize()</Member>
+        <Member type="Method">public override void LoadContent(ContentManager content)</Member>
+        <Member type="Method">public override void UnloadContent()</Member>
+        <Member type="Method">public override void Update(GameTime gameTime)</Member>
+        <Member type="Method">public override void Draw(SpriteBatch spriteBatch)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Options</Name>
+        <Access>Public</Access>
+        <Location left="391" top="741" />
+        <Size width="309" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">static Options instance = null</Member>
+        <Member type="Field">int choicePos = 0</Member>
+        <Member type="Field">SpriteFont testFont</Member>
+        <Member type="Constructor">public Options(GraphicsDevice graphicsDevice)</Member>
+        <Member type="Method">public static MainMenu GetInstance(GraphicsDevice graphicsDevice)</Member>
+        <Member type="Method">public override void Initialize()</Member>
+        <Member type="Method">public override void LoadContent(ContentManager content)</Member>
+        <Member type="Method">public override void UnloadContent()</Member>
+        <Member type="Method">public override void Update(GameTime gameTime)</Member>
+        <Member type="Method">public override void Draw(SpriteBatch spriteBatch)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>GameState</Name>
+        <Access>Public</Access>
+        <Location left="584" top="407" />
+        <Size width="253" height="204" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected GraphicsDevice _graphicsDevice</Member>
+        <Member type="Constructor">public GameState(GraphicsDevice graphicsDevice)</Member>
+        <Member type="Method">public abstract void Draw(SpriteBatch spriteBatch)</Member>
+        <Member type="Method">public abstract void Initialize()</Member>
+        <Member type="Method">public abstract void LoadContent(ContentManager content)</Member>
+        <Member type="Method">public abstract void UnloadContent()</Member>
+        <Member type="Method">public abstract void Update(GameTime gameTime)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>MainMenu</Name>
+        <Access>Public</Access>
+        <Location left="73" top="741" />
+        <Size width="309" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">static MainMenu instance = null</Member>
+        <Member type="Field">int choicePos = 0</Member>
+        <Member type="Field">SpriteFont testFont</Member>
+        <Member type="Constructor">public MainMenu(GraphicsDevice graphicsDevice)</Member>
+        <Member type="Method">public static MainMenu GetInstance(GraphicsDevice graphicsDevice)</Member>
+        <Member type="Method">public override void Initialize()</Member>
+        <Member type="Method">public override void LoadContent(ContentManager content)</Member>
+        <Member type="Method">public override void UnloadContent()</Member>
+        <Member type="Method">public override void Update(GameTime gameTime)</Member>
+        <Member type="Method">public override void Draw(SpriteBatch spriteBatch)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Package">
+        <Name>States</Name>
+        <Location left="43" top="80" />
+        <Size width="1599" height="938" />
+      </Entity>
+      <Entity type="Package">
+        <Name>ReunionLogSoftware</Name>
+        <Location left="10" top="10" />
+        <Size width="3910" height="2401" />
+      </Entity>
+      <Entity type="Package">
+        <Name>KeyboardOwn</Name>
+        <Location left="544" top="1120" />
+        <Size width="320" height="350" />
+      </Entity>
+      <Entity type="Class">
+        <Name>Keyboard</Name>
+        <Access>Public</Access>
+        <Location left="605" top="1230" />
+        <Size width="195" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">static KeyboardState currentKeyState</Member>
+        <Member type="Field">static KeyboardState previousKeyState</Member>
+        <Member type="Method">public static KeyboardState GetState()</Member>
+        <Member type="Method">public static bool IsPressed(Keys key)</Member>
+        <Member type="Method">public static bool HasBeenPressed(Keys key)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Containers>
+      <Container entityIndex="9">
+        <ChildEntity>4</ChildEntity>
+        <ChildEntity>1</ChildEntity>
+        <ChildEntity>8</ChildEntity>
+        <ChildEntity>6</ChildEntity>
+        <ChildEntity>5</ChildEntity>
+        <ChildEntity>3</ChildEntity>
+        <ChildEntity>7</ChildEntity>
+        <ChildEntity>0</ChildEntity>
+      </Container>
+      <Container entityIndex="10">
+        <ChildEntity>11</ChildEntity>
+        <ChildEntity>2</ChildEntity>
+        <ChildEntity>9</ChildEntity>
+      </Container>
+      <Container entityIndex="11">
+        <ChildEntity>12</ChildEntity>
+      </Container>
+    </Containers>
+    <Relationships>
+      <Relationship type="Association" first="2" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1958</X>
+          <Y>478</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1557</X>
+          <Y>506</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="5" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>862</X>
+          <Y>716</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>710</X>
+          <Y>636</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="4" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="6" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Dependency" first="2" second="3">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="7" second="1">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="8" second="12">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="6" second="12">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="5" second="12">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="4" second="12">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Dependency" first="0" second="7">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>868</X>
+          <Y>535</Y>
+        </BendPoint>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

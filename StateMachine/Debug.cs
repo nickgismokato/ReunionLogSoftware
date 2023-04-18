@@ -50,7 +50,7 @@ namespace ReunionLogSoftware.States{
             if(KeyboardOwn.Keyboard.HasBeenPressed(Keys.Enter)){
                 switch(choicePos){
                     case 0:
-                        GraphBuilder.Build();
+                        GraphBuilder.Build("i7kE4");
                         break;
                     case 1:
                         Main.self.ChangeState(StateType.MainMenu);

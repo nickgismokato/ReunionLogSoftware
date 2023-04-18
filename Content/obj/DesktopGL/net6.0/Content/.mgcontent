@@ -4,7 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/Content/Test.spritefont</File>
+    <File>C:/Users/nicka/Documents/Projects/CSharp/ReunionLogSoftware/Content/Test.spritefont</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

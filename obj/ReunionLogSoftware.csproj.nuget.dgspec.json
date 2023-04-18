@@ -1,29 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/ReunionLogSoftware.csproj": {}
+    "C:\\Users\\nicka\\Documents\\Projects\\CSharp\\ReunionLogSoftware\\ReunionLogSoftware.csproj": {}
   },
   "projects": {
-    "/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/ReunionLogSoftware.csproj": {
+    "C:\\Users\\nicka\\Documents\\Projects\\CSharp\\ReunionLogSoftware\\ReunionLogSoftware.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/ReunionLogSoftware.csproj",
+        "projectUniqueName": "C:\\Users\\nicka\\Documents\\Projects\\CSharp\\ReunionLogSoftware\\ReunionLogSoftware.csproj",
         "projectName": "ReunionLogSoftware",
-        "projectPath": "/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/ReunionLogSoftware.csproj",
-        "packagesPath": "/home/nickgismokato/.nuget/packages/",
-        "outputPath": "/home/nickgismokato/Documents/CodeProjects/CSharp/ReunionLogSoftware/obj/",
+        "projectPath": "C:\\Users\\nicka\\Documents\\Projects\\CSharp\\ReunionLogSoftware\\ReunionLogSoftware.csproj",
+        "packagesPath": "C:\\Users\\nicka\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nicka\\Documents\\Projects\\CSharp\\ReunionLogSoftware\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/home/nickgismokato/.local/share/godot/mono/GodotNuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "/home/nickgismokato/.nuget/NuGet/NuGet.Config",
-          "/home/nickgismokato/.nuget/NuGet/config/Godot.Offline.Config"
+          "C:\\Users\\nicka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +46,19 @@
           "dependencies": {
             "GraphQL": {
               "target": "Package",
-              "version": "[7.3.1, )"
+              "version": "[7.4.0, )"
+            },
+            "GraphQL.Client.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "GraphQL.Common": {
+              "target": "Package",
+              "version": "[1.0.3, )"
+            },
+            "GraphQL.MicrosoftDI": {
+              "target": "Package",
+              "version": "[7.4.0, )"
             },
             "GraphQL.NewtonsoftJson": {
               "target": "Package",
@@ -58,6 +72,18 @@
               "target": "Package",
               "version": "[7.3.1, )"
             },
+            "HotChocolate.AspNetCore": {
+              "target": "Package",
+              "version": "[13.0.5, )"
+            },
+            "Json.NET": {
+              "target": "Package",
+              "version": "[1.0.33, )"
+            },
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
             "MonoGame.Content.Builder.Task": {
               "target": "Package",
               "version": "[3.8.1.303, )"
@@ -65,6 +91,10 @@
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",
               "version": "[3.8.1.303, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           },
           "imports": [
@@ -73,7 +103,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -82,7 +113,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.116/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     }

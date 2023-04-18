@@ -19,12 +19,19 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="GraphQL" Version="7.3.1" />
+    <PackageReference Include="GraphQL" Version="7.4.0" />
+    <PackageReference Include="GraphQL.Client.Abstractions" Version="6.0.0" />
+    <PackageReference Include="GraphQL.Common" Version="1.0.3" />
+    <PackageReference Include="GraphQL.MicrosoftDI" Version="7.4.0" />
     <PackageReference Include="GraphQL.NewtonsoftJson" Version="7.3.1" />
     <PackageReference Include="GraphQL.Query.Builder" Version="2.0.1" />
     <PackageReference Include="GraphQL.SystemTextJson" Version="7.3.1" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.5" />
+    <PackageReference Include="Json.NET" Version="1.0.33" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
