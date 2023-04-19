@@ -54,6 +54,7 @@
 \usepackage{pgfplots}
 
 
+
 %--------------------------------------------------------- Theorems setup ---------------------------------------------------------
 \numberwithin{equation}{section}
 \newtheoremstyle{defp}% name
@@ -639,6 +640,72 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \label{fig:MailSupp}
 \end{figure}
 
+
+\chapter{Schema}
+
+\section{Overview}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textbf{Main Call:}] query
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{characterData: \textcolor{green}{CharacterData}}
+\item \ttt{gameData: \textcolor{green}{GameData}}
+\item \ttt{guildData: \textcolor{green}{GuildData}}
+\item \ttt{progressRaceData: \textcolor{green}{ProgressRaceData}}
+\item \ttt{rateLimitData: \textcolor{green}{RateLimitData}}
+\item \ttt{reportData: \textcolor{green}{ReportData}}
+\item \ttt{userData: \textcolor{green}{UserData}}
+\item \ttt{worldData: \textcolor{green}{WorldData}}
+\end{itemize}
+\end{itemize}
+
+\section{\ttt{CharacterData}}
+\section{\ttt{GameData}}
+\section{\ttt{GuildData}}
+\section{\ttt{ProgressRaceData}}
+\section{\ttt{RateLimitData}}
+
+\newpage
+
+\section{\ttt{ReportData}}
+
+\begin{itemize} [noitemsep,topsep=1pt]
+\item \ttt{reportData}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{report(code: \textcolor{green}{String}): \textcolor{green}{Report}}
+\item \ttt{reports(endTime: \textcolor{green}{Float}, \\guildID: \textcolor{green}{Int}, \\guildName: \textcolor{green}{String}, \\guildServerSlug: \textcolor{green}{String}, \\guildServerRegion: \textcolor{green}{String}, \\guildTagID: \textcolor{green}{Int}, \\userID: \textcolor{green}{Int}, \\limit: \textcolor{green}{Int}, \\page: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\zoneID: \textcolor{green}{Int}, \\gameZoneID: \textcolor{green}{Int}}): \textcolor{green}{ReportPagination}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{Report}}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{report}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{code: \textcolor{green}{String!}}
+\item \ttt{endTime: \textcolor{green}{Float!}}
+\item \ttt{events(abilityID: \textcolor{green}{Float}, \\dataType: \textcolor{green}{EventDataType}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightsIDs: [\textcolor{green}{Int}], \\ filterExpression: \textcolor{green}{String}, \\hostilityType: \textcolor{green}{HostilityType}, \\includeResources: \textcolor{green}{Boolean}, \\killType: \textcolor{green}{KillType}, \\limit: \textcolor{green}{Int}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{Int}, \\sourceID: \textcolor{green}{Int},  \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\targetAurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\useAbilityIDs: \textcolor{green}{Boolean}, \\useActorIDs: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{ReportEventPaginator}}
+\item \ttt{exportedSegments: \textcolor{green}{Int}!}
+\item \ttt{fights(difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\fightIDs: [\textcolor{green}{Int}], \\killType: \textcolor{green}{KillType}, \\Translate: \textcolor{green}{Boolean}): [\textcolor{green}{ReportFight}]}
+\item \ttt{graph(abilityID: \textcolor{green}{Float}, \\dataType: \textcolor{green}{GraphDataType}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightsIDs: [\textcolor{green}{Int}], \\ filterExpression: \textcolor{green}{String}, \\hostilityType: \textcolor{green}{HostilityType}, \\killType: \textcolor{green}{KillType}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{Int}, \\sourceID: \textcolor{green}{Int}, \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\targetAurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\viewBy: \textcolor{green}{ViewType}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{JSON}}
+\item \ttt{guild: \textcolor{green}{Guild}}
+\item \ttt{guildTag: \textcolor{green}{GuildTag}}
+\item \ttt{owner: \textcolor{green}{User}}
+\item \ttt{masterData(translate: \textcolor{green}{Boolean}): \textcolor{green}{ReportMasterData}}
+\item \ttt{playerDetails(difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightIDs: [\textcolor{green}{Int}], \\killType: \textcolor{green}{KillType}, \\startTime: \textcolor{green}{Float}, \\translate: \textcolor{green}{Boolean}): \textcolor{green}{JSON}}
+\item \ttt{rankedCharacters: [\textcolor{green}{Character}]}
+\item \ttt{rankings(compare: \textcolor{green}{RankingCompareType}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\fightIDs: [\textcolor{green}{Int}], \\playerMetric: \textcolor{green}{ReportRankingMetricType}, \\timeframe: \textcolor{green}{RankingTimeframeType}): \textcolor{green}{JSON}}
+\item \ttt{region: \textcolor{green}{Region}}
+\item \ttt{revision: \textcolor{green}{Int}!}
+\item \ttt{segments: \textcolor{green}{Int}!}
+\item \ttt{startTime: \textcolor{green}{Float}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{ReportPagination}}
+
+\section{\ttt{UserData}}
+\section{\ttt{WorldData}}
 
 \newpage
 
