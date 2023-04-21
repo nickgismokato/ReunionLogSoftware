@@ -13,7 +13,7 @@ using GraphQL.Client.Abstractions;
 
 using HotChocolate.Language;
 
-using WarcraftLogAPI;
+using ReunionLogSoftware.WarcraftLogAPI;
 
 /*
 Death Event:

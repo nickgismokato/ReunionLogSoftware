@@ -681,31 +681,442 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 
 \begin{itemize}[noitemsep,topsep=1pt]
 \item \ttt{report}
-\begin{itemize}[noitemsep,topsep=1pt]
+\begin{itemize}[itemsep=1pt,topsep=1pt]
 \item \ttt{code: \textcolor{green}{String!}}
 \item \ttt{endTime: \textcolor{green}{Float!}}
-\item \ttt{events(abilityID: \textcolor{green}{Float}, \\dataType: \textcolor{green}{EventDataType}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightsIDs: [\textcolor{green}{Int}], \\ filterExpression: \textcolor{green}{String}, \\hostilityType: \textcolor{green}{HostilityType}, \\includeResources: \textcolor{green}{Boolean}, \\killType: \textcolor{green}{KillType}, \\limit: \textcolor{green}{Int}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{Int}, \\sourceID: \textcolor{green}{Int},  \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\targetAurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\useAbilityIDs: \textcolor{green}{Boolean}, \\useActorIDs: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{ReportEventPaginator}}
+\item \ttt{events(abilityID: \textcolor{green}{Float}, \\dataType: \hyperref[sec:EventDataType]{\textcolor{green}{EventDataType}}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightsIDs: [\textcolor{green}{Int}], \\ filterExpression: \textcolor{green}{String}, \\hostilityType: \hyperref[sec:HostilityType]{\textcolor{green}{HostilityType}}, \\includeResources: \textcolor{green}{Boolean}, \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\limit: \textcolor{green}{Int}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{Int}, \\sourceID: \textcolor{green}{Int},  \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\targetAurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\useAbilityIDs: \textcolor{green}{Boolean}, \\useActorIDs: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{ReportEventPaginator}}
 \item \ttt{exportedSegments: \textcolor{green}{Int}!}
-\item \ttt{fights(difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\fightIDs: [\textcolor{green}{Int}], \\killType: \textcolor{green}{KillType}, \\Translate: \textcolor{green}{Boolean}): [\textcolor{green}{ReportFight}]}
-\item \ttt{graph(abilityID: \textcolor{green}{Float}, \\dataType: \textcolor{green}{GraphDataType}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightsIDs: [\textcolor{green}{Int}], \\ filterExpression: \textcolor{green}{String}, \\hostilityType: \textcolor{green}{HostilityType}, \\killType: \textcolor{green}{KillType}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{Int}, \\sourceID: \textcolor{green}{Int}, \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\targetAurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\viewBy: \textcolor{green}{ViewType}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{JSON}}
+\item \ttt{fights(difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\fightIDs: [\textcolor{green}{Int}], \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\Translate: \textcolor{green}{Boolean}): [\textcolor{green}{ReportFight}]}
+\item \ttt{graph(abilityID: \textcolor{green}{Float}, \\dataType: \hyperref[sec:GraphDataType]{\textcolor{green}{GraphDataType}}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightsIDs: [\textcolor{green}{Int}], \\ filterExpression: \textcolor{green}{String}, \\hostilityType: \hyperref[sec:HostilityType]{\textcolor{green}{HostilityType}}, \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{Int}, \\sourceID: \textcolor{green}{Int}, \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\targetAurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\viewBy: \hyperref[sec:ViewType]{\textcolor{green}{ViewType}}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{JSON}}
 \item \ttt{guild: \textcolor{green}{Guild}}
 \item \ttt{guildTag: \textcolor{green}{GuildTag}}
 \item \ttt{owner: \textcolor{green}{User}}
 \item \ttt{masterData(translate: \textcolor{green}{Boolean}): \textcolor{green}{ReportMasterData}}
-\item \ttt{playerDetails(difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightIDs: [\textcolor{green}{Int}], \\killType: \textcolor{green}{KillType}, \\startTime: \textcolor{green}{Float}, \\translate: \textcolor{green}{Boolean}): \textcolor{green}{JSON}}
+\item \ttt{playerDetails(difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightIDs: [\textcolor{green}{Int}], \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\startTime: \textcolor{green}{Float}, \\translate: \textcolor{green}{Boolean}): \textcolor{green}{JSON}}
 \item \ttt{rankedCharacters: [\textcolor{green}{Character}]}
-\item \ttt{rankings(compare: \textcolor{green}{RankingCompareType}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\fightIDs: [\textcolor{green}{Int}], \\playerMetric: \textcolor{green}{ReportRankingMetricType}, \\timeframe: \textcolor{green}{RankingTimeframeType}): \textcolor{green}{JSON}}
+\item \ttt{rankings(compare: \hyperref[sec:RankingCompareType]{\textcolor{green}{RankingCompareType}}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\fightIDs: [\textcolor{green}{Int}], \\playerMetric: \hyperref[sec:ReportRankingMetricType]{\textcolor{green}{ReportRankingMetricType}}, \\timeframe: \hyperref[sec:RankingTimeframeType]{\textcolor{green}{RankingTimeframeType}}): \textcolor{green}{JSON}}
 \item \ttt{region: \textcolor{green}{Region}}
 \item \ttt{revision: \textcolor{green}{Int}!}
 \item \ttt{segments: \textcolor{green}{Int}!}
 \item \ttt{startTime: \textcolor{green}{Float}!}
+\item \ttt{table(abilityID: \textcolor{green}{Float}, \\dataType: \hyperref[sec:TableDataType]{\textcolor{green}{TableDataType}}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightIDs: [\textcolor{green}{Int}], \\filterExpression: \textcolor{green}{String}, \\hostilityType: \hyperref[sec:HostilityType]{\textcolor{green}{HostilityType}}, \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{String}, \\sourceID: \textcolor{green}{Int}, \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\target AurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\viewBy: \hyperref[sec:ViewType]{\textcolor{green}{ViewType}}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{JSON}}
+\item \ttt{title: \textcolor{green}{String}!}
+\item \ttt{visibility: \textcolor{green}{String}!}
+\item \ttt{zone: \textcolor{green}{Zone}}
+\item \ttt{archiveStatus: \textcolor{green}{ReportArchiveStatus}}
 \end{itemize}
 \end{itemize}
+
+\subsubsection{ReportEventPaginator}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{event}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: \textcolor{green}{JSON}}
+\item \ttt{nextPageTimestamp: \textcolor{green}{Float}}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{ReportFight}
+
+\begin{itemize}[noitemsep, topsep=1pt]
+\item \ttt{fights}
+\begin{itemize}[itemsep=1pt, topsep=1pt]
+\item \ttt{averageItemLevel: \textcolor{green}{Float}}
+\item \ttt{bossPercentage: \textcolor{green}{Float}}
+\item \ttt{boundingBox: \textcolor{green}{ReportMapBoundingBox}}
+\item \ttt{classicSeasonID: \textcolor{green}{Int}}
+\item \ttt{completeRaid: \textcolor{green}{Boolean}!}
+\item \ttt{difficulty: \textcolor{green}{Int}}
+\item \ttt{dungeonPulls: [\textcolor{green}{ReportDungeonPull}]}
+\item \ttt{encounterID: \textcolor{green}{Int}!}
+\item \ttt{endTime: \textcolor{green}{Float}!}
+\item \ttt{enemyNPCs: [\textcolor{green}{ReportFightNPC}]}
+\item \ttt{enemyPets: [\textcolor{green}{ReportFightNPC}]}
+\item \ttt{enemyPlayers: [\textcolor{green}{Int}]}
+\item \ttt{fightpercentage: \textcolor{green}{Float}}
+\item \ttt{friendlyNPCs: [\textcolor{green}{ReportFightNPC}]}
+\item \ttt{friendlyPets: [\textcolor{green}{ReportFightNPC}]}
+\item \ttt{friendlyPlayers: [\textcolor{green}{Int}]}
+\item \ttt{gameZone: \textcolor{green}{GameZone}}
+\item \ttt{hardModeLevel: \textcolor{green}{Int}}
+\item \ttt{id: \textcolor{green}{Int}!}
+\item \ttt{inProgress: \textcolor{green}{Boolean}}
+\item \ttt{keystoneAffixed: [\textcolor{green}{Int}]}
+\item \ttt{keystoneBonus: \textcolor{green}{Int}}
+\item \ttt{keystoneLevel: \textcolor{green}{Int}}
+\item \ttt{keystoneTime: \textcolor{green}{Int}}
+\item \ttt{kill: \textcolor{green}{Boolean}}
+\item \ttt{lastPhase: \textcolor{green}{Int}}
+\item \ttt{lastPhaseIsIntermission: \textcolor{green}{Boolean}}
+\item \ttt{layer: \textcolor{green}{Int}}
+\item \ttt{maps: [\textcolor{green}{ReportMap}]}
+\item \ttt{name: \textcolor{green}{String}!}
+\item \ttt{rating: \textcolor{green}{Int}}
+\item \ttt{size: \textcolor{green}{Int}}
+\item \ttt{startTime: \textcolor{green}{Float}!}
+\item \ttt{talentImportCode(actorID: \textcolor{green}{Int}!): \textcolor{green}{String}}
+\item \ttt{wipeCalledTime: \textcolor{green}{Float}}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{ReportMasterData}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{masterData}
+\begin{itemize}[itemsep=1pt, topsep=1pt]
+\item \ttt{logVersion: \textcolor{green}{Int}!}
+\item \ttt{gameVersion: \textcolor{green}{Int}}
+\item \ttt{lang: \textcolor{green}{String}}
+\item \ttt{abilities: [\textcolor{green}{ReportAbility}]}
+\item \ttt{actors(type: \textcolor{green}{String}, \\subType: \textcolor{green}{String}): [\textcolor{green}{ReportActor}]}
+\end{itemize}
+\end{itemize}
+
+\textbf{ReportAbility}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{abilities}
+\begin{itemize}[itemsep=1pt, topsep=1pt]
+\item \ttt{gameID: \textcolor{green}{Float}}
+\item \ttt{icon: \textcolor{green}{String}}
+\item \ttt{name: \textcolor{green}{String}}
+\item \ttt{type: \textcolor{green}{String}}
+\end{itemize}
+\end{itemize}
+
+
+\textbf{ReportActor}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{actors}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{gameID: \textcolor{green}{Float}}
+\item \ttt{icon: \textcolor{green}{String}}
+\item \ttt{id: \textcolor{green}{Int}}
+\item \ttt{name: \textcolor{green}{String}}
+\item \ttt{petOwner: \textcolor{green}{Int}}
+\item \ttt{server: \textcolor{green}{String}}
+\item \ttt{subType: \textcolor{green}{String}}
+\item \ttt{type: \textcolor{green}{String}}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{ReportArchiveStatus}
 
 \subsection{\ttt{ReportPagination}}
 
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{reportPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\textcolor{green}{Report}]}
+\item \ttt{total: \textcolor{green}{Int}!}
+\item \ttt{per\_page: \textcolor{green}{Int}!}
+\item \ttt{current\_page: \textcolor{green}{Int}!}
+\item \ttt{from: \textcolor{green}{Int}}
+\item \ttt{to: \textcolor{green}{Int}}
+\item \ttt{last\_page: \textcolor{green}{Int}!}
+\item \ttt{has\_more\_pages: \textcolor{green}{Boolean}!}
+\end{itemize}
+\end{itemize}
+
 \section{\ttt{UserData}}
 \section{\ttt{WorldData}}
+
+
+\newpage
+
+
+\section{Important \ttt{Types}/\ttt{Enums}}
+
+\subsection{\ttt{CharacterRankingMetricType}}\label{sec:CharacterRankingMetricType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{CharacterRankingMetricType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{bossdps}
+\item \ttt{default}
+\item \ttt{dps}
+\item \ttt{hps}
+\item \ttt{krsi}
+\item \ttt{playerscore}
+\item \ttt{playerspeed}
+\item \ttt{tankhps}
+\item \ttt{wdps}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{EventDataType}}\label{sec:EventDataType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{EventDataType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{All}
+\item \ttt{Buffs}
+\item \ttt{Casts}
+\item \ttt{CombatantInfo}
+\item \ttt{DamageDone}
+\item \ttt{DamageTaken}
+\item \ttt{Deaths}
+\item \ttt{Debuffs}
+\item \ttt{Dispels}
+\item \ttt{Healing}
+\item \ttt{Interrupts}
+\item \ttt{Resources}
+\item \ttt{Summons}
+\item \ttt{Threat}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{ExternalBuffRankFilter}}\label{sec:ExternalBuffRankFilter}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{ExternalBuffRankFilter}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Any}
+\item \ttt{Require}
+\item \ttt{Exclude}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{FightRankingMetricType}}\label{sec:FightRankingMetricType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{FightRankingMetricType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{default}
+\item \ttt{execution}
+\item \ttt{feats}
+\item \ttt{score}
+\item \ttt{speed}
+\item \ttt{progress}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{GraphDataType}}\label{sec:GraphDataType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{GraphDataType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Summary}
+\item \ttt{Buffs}
+\item \ttt{Casts}
+\item \ttt{DamageDone}
+\item \ttt{DamageTaken}
+\item \ttt{Deaths}
+\item \ttt{Debuffs}
+\item \ttt{Dispels}
+\item \ttt{Healing}
+\item \ttt{Interrupts}
+\item \ttt{Resources}
+\item \ttt{Summons}
+\item \ttt{Survivability}
+\item \ttt{Threat}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{GuildRank}}\label{sec:GuildRank}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{GuildRank}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{NonMember}
+\item \ttt{Applicant}
+\item \ttt{Recruit}
+\item \ttt{Member}
+\item \ttt{Officer}
+\item \ttt{GuildMaster}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{HardModeLevelRankFilter}}\label{sec:HardModeLevelRankFilter}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{HardModeLevelRankFilter}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Any}
+\item \ttt{Highest}
+\item \ttt{NormalMode}
+\item \ttt{Level0}
+\item \ttt{Level1}
+\item \ttt{Level2}
+\item \ttt{Level3}
+\item \ttt{Level4}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{HostilityType}}\label{sec:HostilityType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{HostilityType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Friendlies}
+\item \ttt{Enemies}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{KillType}}\label{sec:KillType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{KillType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{All}
+\item \ttt{Encounters}
+\item \ttt{Kills}
+\item \ttt{Trash}
+\item \ttt{Wipes}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{LeaderboardRank}}\label{sec:LeaderboardRank}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{LeaderboardRank}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Any}
+\item \ttt{LogsOnly}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{RankingCompareType}}\label{sec:RankingCompareType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{RankingCompareType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Rankings}
+\item \ttt{Parses}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{RankingTimeframeType}}\label{sec:RankingTimeframeType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{RankingTimeframeType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Today}
+\item \ttt{Historical}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{ReportRankingMetricType}}\label{sec:ReportRankingMetricType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{ReportRankingMetricType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{bossdps}
+\item \ttt{default}
+\item \ttt{dps}
+\item \ttt{hps}
+\item \ttt{krsi}
+\item \ttt{playerscore}
+\item \ttt{playerspeed}
+\item \ttt{tankhps}
+\item \ttt{wdps}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{RoleType}}\label{sec:RoleType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{RoleType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Any}
+\item \ttt{DPS}
+\item \ttt{Healer}
+\item \ttt{Tank}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{SubscriptionStatus}}\label{sec:SubscriptionStatus}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{SubscriptionStatus}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Silver}
+\item \ttt{Gold}
+\item \ttt{Platinum}
+\item \ttt{LegacySilver}
+\item \ttt{LegacyGold}
+\item \ttt{LegacyPlatinum}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{TableDataType}}\label{sec:TableDataType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{TableDataType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Summary}
+\item \ttt{Buffs}
+\item \ttt{Casts}
+\item \ttt{DamageDone}
+\item \ttt{DamageTaken}
+\item \ttt{Deaths}
+\item \ttt{Debuffs}
+\item \ttt{Dispels}
+\item \ttt{Healing}
+\item \ttt{Interrupts}
+\item \ttt{Resources}
+\item \ttt{Summons}
+\item \ttt{Survivability}
+\item \ttt{Threat}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{ViewType}}\label{sec:ViewType}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{ViewType}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{Default}
+\item \ttt{Ability}
+\item \ttt{Source}
+\item \ttt{Target}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{\_\_DirectiveLocation}}\label{sec:DirectiveLocation}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{\_\_DirectiveLocation}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{QUERY}
+\item \ttt{MUTATION}
+\item \ttt{SUBSCRIPTION}
+\item \ttt{FIELD}
+\item \ttt{FRAGMENT\_DEFINITION}
+\item \ttt{FRAGMENT\_SPREAD}
+\item \ttt{INLINE\_FRAGMENT}
+\item \ttt{VARIABLE\_DEFINITION}
+\item \ttt{SCHEMA}
+\item \ttt{SCALAR}
+\item \ttt{OBJECT}
+\item \ttt{FIELD\_DEFINITION}
+\item \ttt{ARGUMENT\_DEFINITION}
+\item \ttt{INTERFACE}
+\item \ttt{UNION}
+\item \ttt{ENUM}
+\item \ttt{ENUM\_VALUE}
+\item \ttt{INPUT\_OBJECT}
+\item \ttt{INPUT\_FIELD\_DEFINITION}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{\_\_TypeKind}}\label{sec:TypeKind}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\textcolor{blue}{enum}] \ttt{\_\_TypeKind}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{SCALAR}
+\item \ttt{OBJECT}
+\item \ttt{INTERFACE}
+\item \ttt{UNION}
+\item \ttt{ENUM}
+\item \ttt{INPUT\_OBJECT}
+\item \ttt{LIST}
+\item \ttt{NON\_NULL}
+\end{itemize}
+\end{itemize}
+
 
 \newpage
 

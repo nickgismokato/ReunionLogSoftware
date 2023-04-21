@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace ReunionLogSoftware.QueryString{
     public class QueryString{
         public string QString = null;
-        public MasterType mainType = null;
+        public MasterType mainType;
 
         public QueryString(MasterType masterType){
             mainType = masterType;

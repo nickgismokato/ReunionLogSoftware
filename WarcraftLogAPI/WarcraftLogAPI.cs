@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore;
 
 
-namespace WarcraftLogAPI{
+namespace ReunionLogSoftware.WarcraftLogAPI{
     public class WarcraftLogsApi{
         private readonly HttpClient _client;
         private readonly string _clientId;
