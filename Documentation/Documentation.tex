@@ -185,6 +185,8 @@
 \newcommand\tsc[1]{\textsc{#1}}
 \newcommand{\CS}{C\nolinebreak\hspace{-.05em}\raisebox{.6ex}{\tiny \#}}
 
+\newcommand\type[1]{\ttt{\textcolor{green}{#1}}}
+
 %--------------------------------------------------------- Computer Science Setup ---------------------------------------------------------
 
 \usepackage{forest}
@@ -648,14 +650,14 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\textbf{Main Call:}] query
 \begin{itemize}[noitemsep,topsep=1pt]
-\item \ttt{characterData: \textcolor{green}{CharacterData}}
-\item \ttt{gameData: \textcolor{green}{GameData}}
-\item \ttt{guildData: \textcolor{green}{GuildData}}
-\item \ttt{progressRaceData: \textcolor{green}{ProgressRaceData}}
-\item \ttt{rateLimitData: \textcolor{green}{RateLimitData}}
-\item \ttt{reportData: \textcolor{green}{ReportData}}
-\item \ttt{userData: \textcolor{green}{UserData}}
-\item \ttt{worldData: \textcolor{green}{WorldData}}
+\item \ttt{characterData: \type{CharacterData}}
+\item \ttt{gameData: \type{GameData}}
+\item \ttt{guildData: \type{GuildData}}
+\item \ttt{progressRaceData: \type{ProgressRaceData}}
+\item \ttt{rateLimitData: \type{green}{RateLimitData}}
+\item \ttt{reportData: \type{ReportData}}
+\item \ttt{userData: \type{UserData}}
+\item \ttt{worldData: \type{WorldData}}
 \end{itemize}
 \end{itemize}
 
@@ -672,8 +674,8 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize} [noitemsep,topsep=1pt]
 \item \ttt{reportData}
 \begin{itemize}[noitemsep,topsep=1pt]
-\item \ttt{report(code: \textcolor{green}{String}): \textcolor{green}{Report}}
-\item \ttt{reports(endTime: \textcolor{green}{Float}, \\guildID: \textcolor{green}{Int}, \\guildName: \textcolor{green}{String}, \\guildServerSlug: \textcolor{green}{String}, \\guildServerRegion: \textcolor{green}{String}, \\guildTagID: \textcolor{green}{Int}, \\userID: \textcolor{green}{Int}, \\limit: \textcolor{green}{Int}, \\page: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\zoneID: \textcolor{green}{Int}, \\gameZoneID: \textcolor{green}{Int}}): \textcolor{green}{ReportPagination}
+\item \ttt{report(code: \type{String}): \type{Report}}
+\item \ttt{reports(endTime: \type{Float}, \\guildID: \type{Int}, \\guildName: \type{String}, \\guildServerSlug: \type{String}, \\guildServerRegion: \type{String}, \\guildTagID: \type{Int}, \\userID: \type{Int}, \\limit: \type{Int}, \\page: \type{Int}, \\startTime: \type{Float}, \\zoneID: \type{Int}, \\gameZoneID: \type{Int}}): \type{ReportPagination}
 \end{itemize}
 \end{itemize}
 
@@ -682,9 +684,9 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item \ttt{report}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{code: \textcolor{green}{String!}}
-\item \ttt{endTime: \textcolor{green}{Float!}}
-\item \ttt{events(abilityID: \textcolor{green}{Float}, \\dataType: \hyperref[sec:EventDataType]{\textcolor{green}{EventDataType}}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightsIDs: [\textcolor{green}{Int}], \\ filterExpression: \textcolor{green}{String}, \\hostilityType: \hyperref[sec:HostilityType]{\textcolor{green}{HostilityType}}, \\includeResources: \textcolor{green}{Boolean}, \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\limit: \textcolor{green}{Int}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{Int}, \\sourceID: \textcolor{green}{Int},  \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\targetAurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\useAbilityIDs: \textcolor{green}{Boolean}, \\useActorIDs: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{ReportEventPaginator}}
+\item \ttt{code: \type{String!}}
+\item \ttt{endTime: \type{Float!}}
+\item \ttt{events(abilityID: \type{Float}, \\dataType: \hyperref[sec:EventDataType]{\type{EventDataType}}, \\death: \type{Int}, \\difficulty: \type{Int}, \\encounterID: \type{Int}, \\endTime: \type{Float}, \\fightsIDs: [\type{Int}], \\ filterExpression: \type{String}, \\hostilityType: \hyperref[sec:HostilityType]{\type{HostilityType}}, \\includeResources: \type{Boolean}, \\killType: \hyperref[sec:KillType]{\type{KillType}}, \\limit: \type{Int}, \\sourceAurasAbsent: \type{String}, \\sourceAurasPresent: \type{String}, \\sourceClass: \type{Int}, \\sourceID: \type{Int},  \\sourceInstanceID: \type{Int}, \\startTime: \type{Float}, \\targetAurasAbsent: \type{String}, \\targetAurasPresent: \type{String}, \\targetClass: \type{String}, \\targetID: \type{Int}, \\targetInstanceID: \type{Int}, \\translate: \type{Boolean}, \\useAbilityIDs: \type{Boolean}, \\useActorIDs: \type{Boolean}, \\viewOptions: \type{Int}, \\wipeCutoff: \type{Int}): \type{ReportEventPaginator}}
 \item \ttt{exportedSegments: \textcolor{green}{Int}!}
 \item \ttt{fights(difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\fightIDs: [\textcolor{green}{Int}], \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\Translate: \textcolor{green}{Boolean}): [\textcolor{green}{ReportFight}]}
 \item \ttt{graph(abilityID: \textcolor{green}{Float}, \\dataType: \hyperref[sec:GraphDataType]{\textcolor{green}{GraphDataType}}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightsIDs: [\textcolor{green}{Int}], \\ filterExpression: \textcolor{green}{String}, \\hostilityType: \hyperref[sec:HostilityType]{\textcolor{green}{HostilityType}}, \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{Int}, \\sourceID: \textcolor{green}{Int}, \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\targetAurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\viewBy: \hyperref[sec:ViewType]{\textcolor{green}{ViewType}}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{JSON}}
@@ -707,15 +709,6 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \end{itemize}
 \end{itemize}
 
-\subsubsection{ReportEventPaginator}
-
-\begin{itemize}[noitemsep,topsep=1pt]
-\item \ttt{event}
-\begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: \textcolor{green}{JSON}}
-\item \ttt{nextPageTimestamp: \textcolor{green}{Float}}
-\end{itemize}
-\end{itemize}
 
 \subsubsection{ReportFight}
 
@@ -804,28 +797,257 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 
 \subsubsection{ReportArchiveStatus}
 
-\subsection{\ttt{ReportPagination}}
 
-\begin{itemize}[noitemsep,topsep=1pt]
-\item \ttt{reportPagination}
-\begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\textcolor{green}{Report}]}
-\item \ttt{total: \textcolor{green}{Int}!}
-\item \ttt{per\_page: \textcolor{green}{Int}!}
-\item \ttt{current\_page: \textcolor{green}{Int}!}
-\item \ttt{from: \textcolor{green}{Int}}
-\item \ttt{to: \textcolor{green}{Int}}
-\item \ttt{last\_page: \textcolor{green}{Int}!}
-\item \ttt{has\_more\_pages: \textcolor{green}{Boolean}!}
-\end{itemize}
-\end{itemize}
 
 \section{\ttt{UserData}}
+
 \section{\ttt{WorldData}}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{worldData}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{ecounter(id: \type{Int}): \type{Encounter}}
+\item \ttt{expansion(id: \type{int}): \type{Expansion}}
+\item \ttt{expansions: [\type{Expansion}]}
+\item \ttt{region(id: \type{Int}): \type{Region}}
+\item \ttt{region: [\type{Region}]}
+\item \ttt{server(id: \type{Int},\\region: \type{String},\\slug: \type{String}): \type{Server}}
+\item \ttt{subregion(id: \type{Int}): \type{Subregion}}
+\item \ttt{zone(id: \type{Int}): \type{Zone}}
+\item \ttt{zones(expansion\_id: \type{Int}): [\type{Zone}]}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{Encounter}}
+\subsection{\ttt{Expansion}}
+\subsection{\ttt{Region}}
+
+\subsection{\ttt{Server}}
+\subsection{\ttt{Subregion}}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{subregion}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}!}
+\item \ttt{region: \type{Region}!}
+\item \ttt{servers(limit: \type{Int}, page: \type{Int}): \type{ServerPagination}}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\ttt{Zone}}
 
 
 \newpage
 
+\section{\ttt{Pagination Objects}}
+
+\subsection{\ttt{CharacterPagination}}\label{sec:characterpagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{CharacterPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{Character}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameAbilityPagination}}\label{sec:gameabilitypagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameAbilityPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{GameAbility}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameEnchantPagination}}\label{sec:gameenchantpagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameEnchantPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{GameEnchant}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameItemPagination}}\label{sec:gameitempagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameItemPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{GameItem}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameItemSetPagination}}\label{sec:gameitemsetpagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameItemSetPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{GameItemSet}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameMapPagination}}\label{sec:gamemappagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameMapPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{GameMap}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameNPCPagination}}\label{sec:gamenpcpagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameNPCPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{GameNPC}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameZonePagination}}\label{sec:gamezonepagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameZonePagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{GameZone}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GuildAttendancePagination}}\label{sec:guildattendancepagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GuildAttendancePagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{GuildAttendance}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GuildPagination}}\label{sec:guildpagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GuildPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{Guild}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{ReportEventPaginator}}\label{sec:reporteventpaginator}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{ReportEventPaginator}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: \type{JSON}}
+\item \ttt{nextPageTimestamp: \type{Float}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{ReportPagination}}\label{sec:reportpagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{ReportPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{Report}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{ServerPagination}} \label{sec:serverpagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{ServerPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\type{Server}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\newpage
+
+%--------------------------------------------------------- Schema Enums ---------------------------------------------------------
 
 \section{Important \ttt{Types}/\ttt{Enums}}
 
