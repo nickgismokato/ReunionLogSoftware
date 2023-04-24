@@ -43,8 +43,8 @@ namespace ReunionLogSoftware.GraphControl{
 
     public static class GraphBuilder {
         public static async void Build(string code){
-            var client_id = "97afaad9-aac0-410a-9538-8ffd1b067793";
-            var client_secret = "GufWfqiYtuTvwZWnsovbEoPlTp0cICe3VbCsdDOy";
+            var client_id = "Client_name";
+            var client_secret = "Client_Secret";
             var api = new WarcraftLogsApi(client_id, client_secret);
             var accessToken = await api.GetAccessToken();
 
