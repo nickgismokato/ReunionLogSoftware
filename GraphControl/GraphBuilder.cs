@@ -47,7 +47,7 @@ namespace ReunionLogSoftware.GraphControl{
             var client_secret = "Client_Secret";
             var api = new WarcraftLogsApi(client_id, client_secret);
             var accessToken = await api.GetAccessToken();
-
+            
             var reportCode = "KqkXJwvdn6NT2tLZ";
             var reportData = await api.GetReportData(reportCode);
             System.Console.WriteLine(reportData);

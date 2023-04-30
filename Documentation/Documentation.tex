@@ -53,6 +53,7 @@
 \usepackage{cleveref}
 \usepackage{pgfplots}
 
+\usepackage{listings}
 
 
 %--------------------------------------------------------- Theorems setup ---------------------------------------------------------
@@ -241,42 +242,10 @@
 \usepackage[newfloat]{minted}
 
 \definecolor{mauve}{HTML}{E0B0FF}
-\lstset{
-  language=R,
-  basicstyle=\footnotesize, 
-  numbers=left,
-  numberstyle=\tiny\color{gray},
-  stepnumber=1,    
-  firstnumber=1,
-  numbersep=5pt,
-  numberfirstline=true,
-  tabsize=3,
-  frame = single,
-  breaklines=true,
-  title=\lstname,
-  keywordstyle=\color{blue},
-  commentstyle=\color{olive},
-  stringstyle=\color{mauve}
-}
 
 \definecolor{codegray}{gray}{0.85}
 \newcommand{\codes}[1]{\colorbox{codegray}{\texttt{#1}}}
 
-\definecolor{block-gray}{gray}{0.85}
-\newtcolorbox{myquote}{colback=block-gray,grow to right by=-10mm,grow to left by=-10mm,
-boxrule=0pt,boxsep=0pt,breakable}
-\makeatletter
-\def\quoteparse{\@ifnextchar`{\quotex}{\singlequote}}
-\def\quotex#1{\@ifnextchar`{\triplequote\@gobble}{\doublequote}}
-\makeatother
-\def\singlequote#1`{[StartQ]#1[EndQ]\qOn}
-\def\doublequote#1``{[StartQQ]#1[EndQQ]\qOn}
-\long\def\triplequote#1```{\begin{myquote}\parskip 1ex#1\end{myquote}\qOn}
-\def\qOn{\catcode``=\active}
-\def\qOff{\catcode``=12}
-\qOn
-\def`{\qOff \quoteparse}
-\qOff
 
 \usepackage{chngcntr}
 \counterwithin{Exercise}{section}
@@ -284,9 +253,36 @@ boxrule=0pt,boxsep=0pt,breakable}
 
 
 %--------------------------------------------------------- Tikz setup ---------------------------------------------------------
+%#\usetikzlibrary{positioning}
 
-\usetikzlibrary{positioning}
+%--------------------------------------------------------- lst setup ---------------------------------------------------------
 
+\definecolor{key}{HTML}{00FF00}
+\definecolor{val}{HTML}{0000BB}
+
+\lstdefinelanguage{WowAPI}{
+	keywords={Type, Null},
+	keywordstyle=\color{key}\bfseries,
+	keywords=[2]{String, Int, Char, Boolean},
+	keywordstyle=[2]\color{val}\bfseries,
+	sensitive=true,
+	morecomment=[l]{//}
+}
+
+\lstset{language=WowAPI,
+	basicstyle=\footnotesize, 
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,    
+	firstnumber=1,
+	numbersep=5pt,
+	numberfirstline=true,
+	frame = single,
+	breaklines=true,
+	tabsize=4,
+	commentstyle=\color{gray},
+	stringstyle=\color{orange}
+}
 
 %--------------------------------------------------------- Beginning of document ---------------------------------------------------------
 \setlength\parindent{0pt}
@@ -299,7 +295,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 
 \setlength\arraycolsep{2 pt}
 \setcounter{tocdepth}{2}
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{3}
 
 \titlespacing*{\section}
 {0pt}{3ex plus 1ex minus .2ex}{1ex plus .5ex}
@@ -645,201 +641,966 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 
 \chapter{Schema}
 
+\section{Generic \ttt{Types}}
+
+\underline{\textbf{\ttt{Int}}:}
+
+An integer is a whole number $n\in A\subset\mb{Z}$ where $A$ is finite. \textsc{GraphQL} can handle both 32 and 64 bit int, since \tsc{GraphQL V16}. \ttt{Int} is still just a 32 bit integer even though it could support it. Note that the type \ttt{Int} is a signed 32 bit integer.
+
+\medskip
+
+\textit{note:} There is no reason to use 64 bit integers since neither \tsc{WoW} or \tsc{FF14} uses this.
+
+\medskip
+
+\underline{\textbf{\ttt{String}}:}
+
+A \ttt{String} is a scalar of a list of characters i.e \ttt{"This Is a string example"}. Since \ttt{String} is a scalar, there is theocratically no limits for the length in \tsc{GraphQL}. This hasn't been tested to check wether or not \tsc{WarcraftLogsAPI} support very long strings. Practically there is no need for very long strings.
+
+\medskip
+
+\underline{\textbf{\ttt{Boolean}}:}
+
+a \ttt{Boolean} is either \ttt{true} or \ttt{false}. No further explanation is needed.
+
+\medskip
+
+\underline{\textbf{\ttt{Float}}:}
+
+A \ttt{Float} is a signed double precision floating point value, i.e \ttt{float64} or \ttt{IEEE 754 double-precision binary floating-point format} (\cite{floatsWiki}). 
+
+\medskip
+
+\underline{\textbf{\ttt{Generic.Enum}}:}
+A \ttt{Generic.Enum} type doesn't exists within \tsc{GraphQL}. It's up to the developer using \tsc{GraphQL} to implements such types. These can be seen in \cref{sec:Enums}. They don't need string to around them when writing i.e \ttt{dataType: Deaths} where \ttt{Deaths} is of a type \ttt{EventDataType}
+
+\medskip
+
+\underline{\textbf{\ttt{Generic.Pagination}}:}
+
+A \ttt{Pagination} object is an object where some of its data types withing the object is returned as a list.
+
+\smallskip
+
+\textit{Example:} Instead of calling three different players within a guild where these players have type \type{Character} we can just call to the type \type{CharacterPagination} where you give the arguments \ttt{guildID: \type{Int}, limit: \type{Int}, page: \type{Int}}. From here we can get all members of the guild and then from our end remove all unwanted players. This is smart, since we don't need to make three calls but just one call.
+
+\newpage
+
 \section{Overview}
 
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\textbf{Main Call:}] query
-\begin{itemize}[noitemsep,topsep=1pt]
-\item \ttt{characterData: \type{CharacterData}}
-\item \ttt{gameData: \type{GameData}}
-\item \ttt{guildData: \type{GuildData}}
-\item \ttt{progressRaceData: \type{ProgressRaceData}}
-\item \ttt{rateLimitData: \type{green}{RateLimitData}}
-\item \ttt{reportData: \type{ReportData}}
-\item \ttt{userData: \type{UserData}}
-\item \ttt{worldData: \type{WorldData}}
-\end{itemize}
+	\begin{itemize}[noitemsep,topsep=1pt]
+		\item \ttt{characterData: \hyperref[sec:CharacterData]{\type{CharacterData}}}
+		\item \ttt{gameData: \hyperref[sec:GameData]{\type{GameData}}}
+		\item \ttt{guildData: \hyperref[sec:GuildData]{\type{GuildData}}}
+		\item \ttt{progressRaceData: \hyperref[sec:ProgressRaceData]{\type{ProgressRaceData}}}
+		\item \ttt{rateLimitData: \hyperref[sec:RateLimitData]{\type{RateLimitData}}}
+		\item \ttt{reportData: \hyperref[sec:ReportData]{\type{ReportData}}}
+		\item \ttt{userData: \hyperref[sec:UserData]{\type{UserData}}}
+		\item \ttt{worldData: \hyperref[sec:WorldData]{\type{WorldData}}}
+	\end{itemize}
 \end{itemize}
 
-\section{\ttt{CharacterData}}
-\section{\ttt{GameData}}
-\section{\ttt{GuildData}}
-\section{\ttt{ProgressRaceData}}
-\section{\ttt{RateLimitData}}
+\underline{\textbf{Details:}}
+
+\ttt{query} is the main call and is has type \type{Query}. The outputs of this \type{Query} can by any of the \ttt{Data} types. 
+
+\underline{\textbf{Example}}
+
+\begin{lstlisting}[language=WowAPI]
+query{
+	characterData{
+		//Insert CharacterData calls here
+	}
+	reportData{
+		//Insert ReportData calls here
+	}
+}
+\end{lstlisting}
+
 
 \newpage
 
-\section{\ttt{ReportData}}
+\section{\ttt{CharacterData}}\label{sec:CharacterData}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{CharacterData}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{character(id: \type{Int}, serverSlug: \type{String}, serverRegion: \type{String}): \hyperref[sec:Character]{\type{Character}}}
+\item \ttt{characters(guildID: \type{Int}, limit: \type{Int}, page: \type{Int}): \hyperref[sec:characterpagination]{\type{CharacterPagination}}}
+\end{itemize}
+\end{itemize}
+
+\underline{\textbf{Details:}}
+
+\textbf{\ttt{character}:}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Required\\
+		\hline
+		\ttt{id}   & \ttt{Int} & Optional\\
+		\ttt{name}& \ttt{String} & Optional\\
+		\ttt{serverSlug} & \ttt{String} & Optional\\
+		\ttt{serverRegion}    & \ttt{String} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Character}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+
+\smallskip
+
+\textbf{\ttt{characters}:}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Required\\
+		\hline
+		\ttt{guildID}   & \ttt{Int} & Required\\
+		\ttt{limit}& \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{CharacterPagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsection{\ttt{Character}}\label{sec:Character}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+	\item[\ttt{Type}] \ttt{Character}
+	\begin{itemize}[itemsep=1pt,topsep=1pt]
+		\item \ttt{canonicalID: \type{Int}!}
+		\item \ttt{claimed: \type{Boolean}}
+		\item \ttt{classID: \type{Int}!}
+		\item \ttt{encounterRankings(byBracket: \type{Boolean}, \\className: \type{String}, \\compare: \hyperref[sec:RankingCompareType]{\type{RankingCompareType}}, \\difficulty: \type{Int}, \\encounterID: \type{Int}, \\includeCombatantInfo: \type{Boolean}, \\includePrivateLogs: \type{Boolean}, \\metric: \hyperref[sec:CharacterRankingMetricType]{\type{CharacterRankingMetricType}}, \\partition: \type{Int}, \\role: \hyperref[sec:RoleType]{\type{RoleType}}, \\size: \type{Int}, \\specName: \type{String}, \\timeframe: \hyperref[sec:RankingTimeframeType]{\type{RankingTimeframeType}}): \type{JSON}}
+		\item \ttt{faction: \hyperref[sec:GameFaction]{\type{GameFaction}}!}
+		\item \ttt{gameData(specID: \type{Int}, forceUpdate: \type{Boolean}): \type{JSON}}
+		\item \ttt{guildRank: \type{Int}!}
+		\item \ttt{guilds: [\hyperref[sec:Guild]{\type{Guild}}]}
+		\item \ttt{hidden: \type{Boolean}!}
+		\item \ttt{id: \type{Int}!}
+		\item \ttt{level: \type{Int}!}
+		\item \ttt{name: \type{String}}
+		\item \ttt{recentReports(limit: \type{Int}, page: \type{Int}): \hyperref[sec:reportpagination]{\type{ReportPagination}}}
+		\item \ttt{server: \hyperref[sec:Server]{\type{Server}}!}
+		\item \ttt{zoneRankings(byBracket: \type{Boolean}, \\className: \type{String}, \\compare: \hyperref[sec:RankingCompareType]{\type{RankingCompareType}}, \\difficulty: \type{Int}, \\includePrivateLogs: \type{Boolean}, \\metric: \hyperref[sec:CharacterRankingMetricType]{\type{CharacterRankingMetricType}}, \\partition: \type{Int}, \\role: \hyperref[sec:RoleType]{\type{RoleType}}, \\size: \type{Int}, \\specName: \type{String}, \\timeframe: \hyperref[sec:RankingTimeframeType]{\type{RankingTimeframeType}}, \\zoneID: \type{Int}): \type{JSON}}
+	\end{itemize}
+\end{itemize}
+
+\underline{\textbf{Details:}}
+
+\textbf{\ttt{canonicalID}:}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Int!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+\medskip
+
+\textbf{\ttt{claimed}:}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Boolean}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{\ttt{classID}:}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Int!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\newpage
+
+\textbf{\ttt{encounterRankings}:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Required\\
+		\hline
+		\ttt{byBracket}   & \ttt{Boolean} & Optional\\
+		\ttt{className}& \ttt{String} & Optional\\
+		\ttt{compare} & \ttt{RankingCompareType} & Optional\\
+		\ttt{difficulty} & \ttt{Int} & Optional\\
+		\ttt{encounterID} & \ttt{Int} & Required\\
+		\ttt{includeCombatantInfo} & \ttt{Boolean} & Optional\\
+		\ttt{includePrivateLogs} & \ttt{Boolean} & Optional\\
+		\ttt{metric} & \ttt{CharacterRankingMetricType} & Optional\\
+		\ttt{partition} & \ttt{Int} & Optional\\
+		\ttt{role} & \ttt{RoleType} & Optional\\
+		\ttt{size} & \ttt{Int} & Optional\\
+		\ttt{specName} & \ttt{String} & Optional\\
+		\ttt{timeframe} & \ttt{RankingTimeframeType} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{JSON}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{\ttt{faction}:}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameFaction!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{\ttt{gameData}:}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{JSON}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{\ttt{guildRank}:}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Int!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{\ttt{guilds}:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: [\ttt{Guild}]} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{\ttt{hidden}:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Boolean!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{\ttt{id}:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Int!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\newpage
+
+\textbf{\ttt{level}:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Int!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{\ttt{name}:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{String}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{\ttt{recentReports}:}
+
+\medskip
+
+\textbf{\ttt{server}:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Server!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{\ttt{zoneRankings}:}
+
+
+
+\subsection{Example}
+
+\begin{lstlisting}[language=WowAPI]
+query{
+	characterData{
+		character(id: 0000, name: "test"){
+			claimed
+			classID
+			hidden
+			id
+			server{
+				id
+				name
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+This query call makes the toplevel call to \ttt{query}. Then after that it chooses the \ttt{characterData} call as it sub call category. Thereafter we then further call  the \ttt{character} sub call category and gives the required arguments. Then we call to get the data \ttt{claimed, classID, hidden, id, server} where \ttt{server} return \ttt{id} and \ttt{name} as it data.  
+
+\newpage
+
+\section{\ttt{GameData}}\label{sec:GameData}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameData}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{abilities(limit: \type{Int}, page: \type{Int}): \hyperref[sec:gameabilitypagination]{\type{GameAbilityPagination}}}
+\item \ttt{ability(id: \type{Int}): \hyperref[sec:GameAbility]{\type{GameAbility}}}
+\item \ttt{achievement(id: \type{Int}): \hyperref[sec:GameAchievement]{\type{GameAchievement}}}
+\item \ttt{achievements(limit: \type{Int}, page: \type{Int}): \hyperref[sec:gameachievementpagination]{\type{GameAchievementPagination}}}
+\item \ttt{affix(id: \type{Int}): \hyperref[sec:GameAffix]{\type{GameAffix}}}
+\item \ttt{affixes: [\hyperref[sec:GameAffix]{\type{GameAffix}}]}
+\item \ttt{class(id: \type{Int}, faction\_id: \type{Int}, zone\_id: \type{Int}): \hyperref[sec:GameClass]{\type{GameClass}}}
+\item \ttt{(faction\_id: \type{Int}, zone\_id: \type{Int}): [\hyperref[sec:GameClass]{\type{GameClass}}]}
+\item \ttt{enchant(id: \type{Int}): \hyperref[sec:GameEnchant]{\type{GameEnchant}}}
+\item \ttt{enchants(limit: \type{Int}, page: \type{Int}): \hyperref[sec:gameenchantpagination]{\type{GameEnchantPagination}}}
+\item \ttt{factions: [\hyperref[sec:GameFaction]{\type{GameFaction}}]}
+\item \ttt{item(id: \type{Int}): \hyperref[sec:GameItem]{\type{GameItem}}}
+\item \ttt{item\_set(id: \type{Int}): \hyperref[sec:GameItemSet]{\type{GameItemSet}}}
+\item \ttt{item\_sets(limit: \type{Int}, page: \type{Int}): \hyperref[sec:gameitemsetpagination]{\type{GameItemSetPagination}}}
+\item \ttt{items(limit: \type{Int}, page: \type{Int}): \hyperref[sec:gameitempagination]{\type{GameItemPagination}}}
+\item \ttt{map(id: \type{Int}): \hyperref[sec:GameMap]{\type{GameMap}}}
+\item \ttt{maps(limit: \type{Int}, page: \type{Int}): \hyperref[sec:gamemappagination]{\type{GameMapPagination}}}
+\item \ttt{npc(id: \type{Int}): \hyperref[sec:GameNPC]{\type{GameNPC}}}
+\item \ttt{npcs(limit: \type{Int}, page: \type{Int}): \hyperref[sec:gamenpcpagination]{\type{GameNPCPagination}}}
+\item \ttt{zone(id: \type{Int}): \hyperref[sec:GameZone]{\type{GameZone}}}
+\item \ttt{zones(limit: \type{Int}, page: \type{Int}): \hyperref[sec:gamezonepagination]{\type{GameZonePagination}}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameAbility}}\label{sec:GameAbility}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameAbility}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{icon: \type{String}}
+\item \ttt{name: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameAchievement}}\label{sec:GameAchievement}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameAchievement}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{icon: \type{String}}
+\item \ttt{name: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameAffix}}\label{sec:GameAffix}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameAffix}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{icon: \type{String}}
+\item \ttt{name: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameClass}}\label{sec:GameClass}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameClass}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}!}
+\item \ttt{slug: \type{String}!}
+\item \ttt{specs: \hyperref[sec:GameSpec]{\type{GameSpec}}}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{\ttt{GameSpec}}\label{sec:GameSpec}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameSpec}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{class: \hyperref[sec:GameClass]{\type{GameClass}}}
+\item \ttt{name: \type{String}!}
+\item \ttt{slug: \type{String}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameEnchant}}\label{sec:GameEnchant}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameEnchant}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameFaction}}\label{sec:GameFaction}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \type{GameFaction}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameItem}}\label{sec:GameItem}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameItem}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{icon: \type{String}}
+\item \ttt{name: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameItemSet}}\label{sec:GameItemSet}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameItemSet}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameMap}}\label{sec:GameMap}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameMap}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameNPC}}\label{sec:GameNPC}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameNPC}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameZone}}\label{sec:GameZone}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameZone}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Float}!}
+\item \ttt{name: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsection{Example}
+
+\newpage
+
+
+%\begin{itemize}[noitemsep,topsep=1pt]
+%\item[\ttt{Type}]
+%\begin{itemize}[itemsep=1pt,topsep=1pt]
+%\item \ttt{}
+%\end{itemize}
+%\end{itemize}
+
+\section{\ttt{GuildData}}\label{sec:GuildData}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GuildData}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{guild(id: \type{Int}, name: \type{String}, serverSlug: \type{String}, serverRegion: \type{String}): \hyperref[sec:Guild]{\type{Guild}}}
+\item \ttt{guilds(limit: \type{Int}, page: \type{Int}, \\serverID: \type{Int}, serverSlug: \type{String}, \\serverRegion: \type{String}): \hyperref[sec:guildpagination]{\type{GuildPagination}}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{Guild}}\label{sec:Guild}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+	\item[\ttt{Type}] \ttt{Guild}
+	\begin{itemize}[itemsep=1pt,topsep=1pt]
+		\item \ttt{attendance(guildTagId: \type{Int}, limit: \type{Int}, page: \type{Int}, zoneID: \type{Int}): \hyperref[sec:guildattendancepagination]{\type{GuildAttendancePagination}}!}
+		\item \ttt{competitionMode: \type{Boolean}!}
+		\item \ttt{description: \type{String}!}
+		\item \ttt{faction: \hyperref[sec:GameFaction]{\type{GameFaction}}!}
+		\item \ttt{id: \type{Int}!}
+		\item \ttt{name: \type{String}!}
+		\item \ttt{server:\hyperref[sec:Server]{ \type{Server}}!}
+		\item \ttt{stealthMode: \type{Boolean}!}
+		\item \ttt{tags: [\hyperref[sec:GuildTag]{\type{GuildTag}}]}
+		\item \ttt{members(limit: \type{Int}, page: \type{Int}): \hyperref[sec:characterpagination]{\type{CharacterPagination}}!}
+		\item \ttt{currentUserRank: \hyperref[sec:GuildRank]{\type{GuildRank}}}
+		\item \ttt{zoneRank(zoneID: \type{Int}): \hyperref[sec:GuildZoneRankings]{\type{GuildZoneRankings}}!}
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{\ttt{GuildTag}}\label{sec:GuildTag}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GuildTag}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{guild: \hyperref[sec:Guild]{\type{Guild}}!}
+\item \ttt{name: \type{String}!}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{\ttt{GuildZoneRankings}}\label{sec:GuildZoneRankings}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GuildZoneRankings}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{progress(size: \type{Int}): \hyperref[sec:WorldRegionServerRankPositions]{\type{WorldRegionServerRankPositions}}}
+\item \ttt{speed(size: \type{Int}, difficulty: \type{Int}): \hyperref[sec:WorldRegionServerRankPositions]{\type{WorldRegionServerRankPositions}}}
+\item \ttt{completeRaidSpeed(size: \type{Int}, difficulty: \type{Int}): \hyperref[sec:WorldRegionServerRankPositions]{\type{WorldRegionServerRankPositions}}}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{\ttt{GuildAttendance}}\label{sec:GuildAttendance}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GuildAttendance}
+\begin{itemize}[itemsep=1pt, topsep=1pt]
+\item \ttt{code: \type{String}!}
+\item \ttt{players: [\hyperref[sec:PlayerAttendance]{\type{PlayerAttendance}}]}
+\item \ttt{startTime: \type{Float}}
+\item \ttt{zone: \hyperref[sec:Zone]{\type{Zone}}}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{\ttt{PlayerAttendance}}\label{sec:PlayerAttendance}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{PlayerAttendance}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{name: \type{String}}
+\item \ttt{type: \type{String}}
+\item \ttt{presence: \type{Int}}
+\end{itemize}
+\end{itemize}
+
+\subsection{Example}
+
+\newpage
+
+
+
+
+\section{\ttt{ProgressRaceData}}\label{sec:ProgressRaceData}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+	\item[\ttt{Type}] \ttt{ProgressRaceData}
+	\begin{itemize}[itemsep=1pt,topsep=1pt]
+		\item \ttt{progressRace(serverRegion: \type{String}, ServerSubregion: \type{String}, \\serverSlug: \type{String}, zoneID: \type{Int}, \\competitionID: \type{Int}, difficulty: \type{Int}, \\size: \type{Int}, guildID: \type{Int}, \\guildName: \type{String}): \type{JSON}}
+		\item \ttt{detailedComposition(competitionID: \type{Int}, guildID: \type{Int}, \\guildName: \type{String}, serverSlug: \type{String}, \\serverRegion: \type{String}, encounterID: \type{Int}, \\difficulty: \type{Int}, size: \type{Int}): \type{JSON}}
+	\end{itemize}
+\end{itemize}
+
+\subsection{Example}
+
+\newpage
+
+
+
+
+\section{\ttt{RateLimitData}}\label{sec:RateLimitData}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{RateLimitData}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{limitPerHour: \type{Int}!}
+\item \ttt{pointSpentThisHour: \type{Float}!}
+\item \ttt{pointsResetIn: \type{Int}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{Example}
+
+\newpage
+
+
+
+
+\section{\ttt{ReportData}}\label{sec:ReportData}
 
 \begin{itemize} [noitemsep,topsep=1pt]
 \item \ttt{reportData}
+	\begin{itemize}[noitemsep,topsep=1pt]
+		\item \ttt{report(code: \type{String}): \hyperref[sec:Report]{\type{Report}}}
+		\item \ttt{reports(endTime: \type{Float}, \\guildID: \type{Int}, \\guildName: \type{String}, \\guildServerSlug: \type{String}, \\guildServerRegion: \type{String}, \\guildTagID: \type{Int}, \\userID: \type{Int}, \\limit: \type{Int}, \\page: \type{Int}, \\startTime: \type{Float}, \\zoneID: \type{Int}, \\gameZoneID: \type{Int}}): \hyperref[sec:reportpagination]{\type{ReportPagination}}
+	\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{Report}}\label{sec:Report}
+
 \begin{itemize}[noitemsep,topsep=1pt]
-\item \ttt{report(code: \type{String}): \type{Report}}
-\item \ttt{reports(endTime: \type{Float}, \\guildID: \type{Int}, \\guildName: \type{String}, \\guildServerSlug: \type{String}, \\guildServerRegion: \type{String}, \\guildTagID: \type{Int}, \\userID: \type{Int}, \\limit: \type{Int}, \\page: \type{Int}, \\startTime: \type{Float}, \\zoneID: \type{Int}, \\gameZoneID: \type{Int}}): \type{ReportPagination}
-\end{itemize}
-\end{itemize}
-
-\subsection{\ttt{Report}}
-
-\begin{itemize}[noitemsep,topsep=1pt]
-\item \ttt{report}
-\begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{code: \type{String!}}
-\item \ttt{endTime: \type{Float!}}
-\item \ttt{events(abilityID: \type{Float}, \\dataType: \hyperref[sec:EventDataType]{\type{EventDataType}}, \\death: \type{Int}, \\difficulty: \type{Int}, \\encounterID: \type{Int}, \\endTime: \type{Float}, \\fightsIDs: [\type{Int}], \\ filterExpression: \type{String}, \\hostilityType: \hyperref[sec:HostilityType]{\type{HostilityType}}, \\includeResources: \type{Boolean}, \\killType: \hyperref[sec:KillType]{\type{KillType}}, \\limit: \type{Int}, \\sourceAurasAbsent: \type{String}, \\sourceAurasPresent: \type{String}, \\sourceClass: \type{Int}, \\sourceID: \type{Int},  \\sourceInstanceID: \type{Int}, \\startTime: \type{Float}, \\targetAurasAbsent: \type{String}, \\targetAurasPresent: \type{String}, \\targetClass: \type{String}, \\targetID: \type{Int}, \\targetInstanceID: \type{Int}, \\translate: \type{Boolean}, \\useAbilityIDs: \type{Boolean}, \\useActorIDs: \type{Boolean}, \\viewOptions: \type{Int}, \\wipeCutoff: \type{Int}): \type{ReportEventPaginator}}
-\item \ttt{exportedSegments: \textcolor{green}{Int}!}
-\item \ttt{fights(difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\fightIDs: [\textcolor{green}{Int}], \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\Translate: \textcolor{green}{Boolean}): [\textcolor{green}{ReportFight}]}
-\item \ttt{graph(abilityID: \textcolor{green}{Float}, \\dataType: \hyperref[sec:GraphDataType]{\textcolor{green}{GraphDataType}}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightsIDs: [\textcolor{green}{Int}], \\ filterExpression: \textcolor{green}{String}, \\hostilityType: \hyperref[sec:HostilityType]{\textcolor{green}{HostilityType}}, \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{Int}, \\sourceID: \textcolor{green}{Int}, \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\targetAurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\viewBy: \hyperref[sec:ViewType]{\textcolor{green}{ViewType}}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{JSON}}
-\item \ttt{guild: \textcolor{green}{Guild}}
-\item \ttt{guildTag: \textcolor{green}{GuildTag}}
-\item \ttt{owner: \textcolor{green}{User}}
-\item \ttt{masterData(translate: \textcolor{green}{Boolean}): \textcolor{green}{ReportMasterData}}
-\item \ttt{playerDetails(difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightIDs: [\textcolor{green}{Int}], \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\startTime: \textcolor{green}{Float}, \\translate: \textcolor{green}{Boolean}): \textcolor{green}{JSON}}
-\item \ttt{rankedCharacters: [\textcolor{green}{Character}]}
-\item \ttt{rankings(compare: \hyperref[sec:RankingCompareType]{\textcolor{green}{RankingCompareType}}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\fightIDs: [\textcolor{green}{Int}], \\playerMetric: \hyperref[sec:ReportRankingMetricType]{\textcolor{green}{ReportRankingMetricType}}, \\timeframe: \hyperref[sec:RankingTimeframeType]{\textcolor{green}{RankingTimeframeType}}): \textcolor{green}{JSON}}
-\item \ttt{region: \textcolor{green}{Region}}
-\item \ttt{revision: \textcolor{green}{Int}!}
-\item \ttt{segments: \textcolor{green}{Int}!}
-\item \ttt{startTime: \textcolor{green}{Float}!}
-\item \ttt{table(abilityID: \textcolor{green}{Float}, \\dataType: \hyperref[sec:TableDataType]{\textcolor{green}{TableDataType}}, \\death: \textcolor{green}{Int}, \\difficulty: \textcolor{green}{Int}, \\encounterID: \textcolor{green}{Int}, \\endTime: \textcolor{green}{Float}, \\fightIDs: [\textcolor{green}{Int}], \\filterExpression: \textcolor{green}{String}, \\hostilityType: \hyperref[sec:HostilityType]{\textcolor{green}{HostilityType}}, \\killType: \hyperref[sec:KillType]{\textcolor{green}{KillType}}, \\sourceAurasAbsent: \textcolor{green}{String}, \\sourceAurasPresent: \textcolor{green}{String}, \\sourceClass: \textcolor{green}{String}, \\sourceID: \textcolor{green}{Int}, \\sourceInstanceID: \textcolor{green}{Int}, \\startTime: \textcolor{green}{Float}, \\targetAurasAbsent: \textcolor{green}{String}, \\target AurasPresent: \textcolor{green}{String}, \\targetClass: \textcolor{green}{String}, \\targetID: \textcolor{green}{Int}, \\targetInstanceID: \textcolor{green}{Int}, \\translate: \textcolor{green}{Boolean}, \\viewOptions: \textcolor{green}{Int}, \\viewBy: \hyperref[sec:ViewType]{\textcolor{green}{ViewType}}, \\wipeCutoff: \textcolor{green}{Int}): \textcolor{green}{JSON}}
-\item \ttt{title: \textcolor{green}{String}!}
-\item \ttt{visibility: \textcolor{green}{String}!}
-\item \ttt{zone: \textcolor{green}{Zone}}
-\item \ttt{archiveStatus: \textcolor{green}{ReportArchiveStatus}}
+	\item \ttt{report}
+	\begin{itemize}[itemsep=1pt,topsep=1pt]
+		\item \ttt{code: \type{String!}}
+		\item \ttt{endTime: \type{Float!}}
+		\item \ttt{events(abilityID: \type{Float}, \\dataType: \hyperref[sec:EventDataType]{\type{EventDataType}}, \\death: \type{Int}, \\difficulty: \type{Int}, \\encounterID: \type{Int}, \\endTime: \type{Float}, \\fightsIDs: [\type{Int}], \\ filterExpression: \type{String}, \\hostilityType: \hyperref[sec:HostilityType]{\type{HostilityType}}, \\includeResources: \type{Boolean}, \\killType: \hyperref[sec:KillType]{\type{KillType}}, \\limit: \type{Int}, \\sourceAurasAbsent: \type{String}, \\sourceAurasPresent: \type{String}, \\sourceClass: \type{Int}, \\sourceID: \type{Int},  \\sourceInstanceID: \type{Int}, \\startTime: \type{Float}, \\targetAurasAbsent: \type{String}, \\targetAurasPresent: \type{String}, \\targetClass: \type{String}, \\targetID: \type{Int}, \\targetInstanceID: \type{Int}, \\translate: \type{Boolean}, \\useAbilityIDs: \type{Boolean}, \\useActorIDs: \type{Boolean}, \\viewOptions: \type{Int}, \\wipeCutoff: \type{Int}): \hyperref[sec:reporteventpaginator]{\type{ReportEventPaginator}}}
+		\item \ttt{exportedSegments: \type{Int}!}
+		\item \ttt{fights(difficulty: \type{Int}, \\encounterID: \type{Int}, \\fightIDs: [\type{Int}], \\killType: \hyperref[sec:KillType]{\type{KillType}}, \\Translate: \type{Boolean}): [\type{ReportFight}]}
+		\item \ttt{graph(abilityID: \type{Float}, \\dataType: \hyperref[sec:GraphDataType]{\type{GraphDataType}}, \\death: \type{Int}, \\difficulty: \type{Int}, \\encounterID: \type{Int}, \\endTime: \type{Float}, \\fightsIDs: [\type{Int}], \\ filterExpression: \type{String}, \\hostilityType: \hyperref[sec:HostilityType]{\type{HostilityType}}, \\killType: \hyperref[sec:KillType]{\type{KillType}}, \\sourceAurasAbsent: \type{String}, \\sourceAurasPresent: \type{String}, \\sourceClass: \type{Int}, \\sourceID: \type{Int}, \\sourceInstanceID: \type{Int}, \\startTime: \type{Float}, \\targetAurasAbsent: \type{String}, \\targetAurasPresent: \type{String}, \\targetClass: \type{String}, \\targetID: \type{Int}, \\targetInstanceID: \type{Int}, \\translate: \type{Boolean}, \\viewOptions: \type{Int}, \\viewBy: \hyperref[sec:ViewType]{\type{ViewType}}, \\wipeCutoff: \type{Int}): \type{JSON}}
+		\item \ttt{guild: \type{Guild}}
+		\item \ttt{guildTag: \type{GuildTag}}
+		\item \ttt{owner: \hyperref[sec:User]{\type{User}}}
+		\item \ttt{masterData(translate: \type{Boolean}): \type{ReportMasterData}}
+		\item \ttt{playerDetails(difficulty: \type{Int}, \\encounterID: \type{Int}, \\endTime: \type{Float}, \\fightIDs: [\type{Int}], \\killType: \hyperref[sec:KillType]{\type{KillType}}, \\startTime: \type{Float}, \\translate: \type{Boolean}): \type{JSON}}
+		\item \ttt{rankedCharacters: [\hyperref[sec:Character]{\type{Character}}]}
+		\item \ttt{rankings(compare: \hyperref[sec:RankingCompareType]{\type{RankingCompareType}}, \\difficulty: \type{Int}, \\encounterID: \type{Int}, \\fightIDs: [\type{Int}], \\playerMetric: \hyperref[sec:ReportRankingMetricType]{\type{ReportRankingMetricType}}, \\timeframe: \hyperref[sec:RankingTimeframeType]{\type{RankingTimeframeType}}): \type{JSON}}
+		\item \ttt{region: \type{Region}}
+		\item \ttt{revision: \type{Int}!}
+		\item \ttt{segments: \type{Int}!}
+		\item \ttt{startTime: \type{Float}!}
+		\item \ttt{table(abilityID: \type{Float}, \\dataType: \hyperref[sec:TableDataType]{\type{TableDataType}}, \\death: \type{Int}, \\difficulty: \type{Int}, \\encounterID: \type{Int}, \\endTime: \type{Float}, \\fightIDs: [\type{Int}], \\filterExpression: \type{String}, \\hostilityType: \hyperref[sec:HostilityType]{\type{HostilityType}}, \\killType: \hyperref[sec:KillType]{\type{KillType}}, \\sourceAurasAbsent: \type{String}, \\sourceAurasPresent: \type{String}, \\sourceClass: \type{String}, \\sourceID: \type{Int}, \\sourceInstanceID: \type{Int}, \\startTime: \type{Float}, \\targetAurasAbsent: \type{String}, \\target AurasPresent: \type{String}, \\targetClass: \type{String}, \\targetID: \type{Int}, \\targetInstanceID: \type{Int}, \\translate: \type{Boolean}, \\viewOptions: \type{Int}, \\viewBy: \hyperref[sec:ViewType]{\type{ViewType}}, \\wipeCutoff: \type{Int}): \type{JSON}}
+		\item \ttt{title: \type{String}!}
+		\item \ttt{visibility: \type{String}!}
+		\item \ttt{zone: \hyperref[sec:Zone]{\type{Zone}}}
+		\item \ttt{archiveStatus: \type{ReportArchiveStatus}}
 \end{itemize}
 \end{itemize}
 
 
-\subsubsection{ReportFight}
+\subsubsection{ReportFight}\label{sec:ReportFight}
 
 \begin{itemize}[noitemsep, topsep=1pt]
 \item \ttt{fights}
 \begin{itemize}[itemsep=1pt, topsep=1pt]
-\item \ttt{averageItemLevel: \textcolor{green}{Float}}
-\item \ttt{bossPercentage: \textcolor{green}{Float}}
-\item \ttt{boundingBox: \textcolor{green}{ReportMapBoundingBox}}
-\item \ttt{classicSeasonID: \textcolor{green}{Int}}
-\item \ttt{completeRaid: \textcolor{green}{Boolean}!}
-\item \ttt{difficulty: \textcolor{green}{Int}}
-\item \ttt{dungeonPulls: [\textcolor{green}{ReportDungeonPull}]}
-\item \ttt{encounterID: \textcolor{green}{Int}!}
-\item \ttt{endTime: \textcolor{green}{Float}!}
-\item \ttt{enemyNPCs: [\textcolor{green}{ReportFightNPC}]}
-\item \ttt{enemyPets: [\textcolor{green}{ReportFightNPC}]}
-\item \ttt{enemyPlayers: [\textcolor{green}{Int}]}
-\item \ttt{fightpercentage: \textcolor{green}{Float}}
-\item \ttt{friendlyNPCs: [\textcolor{green}{ReportFightNPC}]}
-\item \ttt{friendlyPets: [\textcolor{green}{ReportFightNPC}]}
-\item \ttt{friendlyPlayers: [\textcolor{green}{Int}]}
-\item \ttt{gameZone: \textcolor{green}{GameZone}}
-\item \ttt{hardModeLevel: \textcolor{green}{Int}}
-\item \ttt{id: \textcolor{green}{Int}!}
-\item \ttt{inProgress: \textcolor{green}{Boolean}}
-\item \ttt{keystoneAffixed: [\textcolor{green}{Int}]}
-\item \ttt{keystoneBonus: \textcolor{green}{Int}}
-\item \ttt{keystoneLevel: \textcolor{green}{Int}}
-\item \ttt{keystoneTime: \textcolor{green}{Int}}
-\item \ttt{kill: \textcolor{green}{Boolean}}
-\item \ttt{lastPhase: \textcolor{green}{Int}}
-\item \ttt{lastPhaseIsIntermission: \textcolor{green}{Boolean}}
-\item \ttt{layer: \textcolor{green}{Int}}
-\item \ttt{maps: [\textcolor{green}{ReportMap}]}
-\item \ttt{name: \textcolor{green}{String}!}
-\item \ttt{rating: \textcolor{green}{Int}}
-\item \ttt{size: \textcolor{green}{Int}}
-\item \ttt{startTime: \textcolor{green}{Float}!}
-\item \ttt{talentImportCode(actorID: \textcolor{green}{Int}!): \textcolor{green}{String}}
-\item \ttt{wipeCalledTime: \textcolor{green}{Float}}
+\item \ttt{averageItemLevel: \type{Float}}
+\item \ttt{bossPercentage: \type{Float}}
+\item \ttt{boundingBox: \type{ReportMapBoundingBox}}
+\item \ttt{classicSeasonID: \type{Int}}
+\item \ttt{completeRaid: \type{Boolean}!}
+\item \ttt{difficulty: \type{Int}}
+\item \ttt{dungeonPulls: [\type{ReportDungeonPull}]}
+\item \ttt{encounterID: \type{Int}!}
+\item \ttt{endTime: \type{Float}!}
+\item \ttt{enemyNPCs: [\type{ReportFightNPC}]}
+\item \ttt{enemyPets: [\type{ReportFightNPC}]}
+\item \ttt{enemyPlayers: [\type{Int}]}
+\item \ttt{fightpercentage: \type{Float}}
+\item \ttt{friendlyNPCs: [\type{ReportFightNPC}]}
+\item \ttt{friendlyPets: [\type{ReportFightNPC}]}
+\item \ttt{friendlyPlayers: [\type{Int}]}
+\item \ttt{gameZone: \type{GameZone}}
+\item \ttt{hardModeLevel: \type{Int}}
+\item \ttt{id: \type{Int}!}
+\item \ttt{inProgress: \type{Boolean}}
+\item \ttt{keystoneAffixed: [\type{Int}]}
+\item \ttt{keystoneBonus: \type{Int}}
+\item \ttt{keystoneLevel: \type{Int}}
+\item \ttt{keystoneTime: \type{Int}}
+\item \ttt{kill: \type{Boolean}}
+\item \ttt{lastPhase: \type{Int}}
+\item \ttt{lastPhaseIsIntermission: \type{Boolean}}
+\item \ttt{layer: \type{Int}}
+\item \ttt{maps: [\type{ReportMap}]}
+\item \ttt{name: \type{String}!}
+\item \ttt{rating: \type{Int}}
+\item \ttt{size: \type{Int}}
+\item \ttt{startTime: \type{Float}!}
+\item \ttt{talentImportCode(actorID: \type{Int}!): \type{String}}
+\item \ttt{wipeCalledTime: \type{Float}}
 \end{itemize}
 \end{itemize}
 
-\subsubsection{ReportMasterData}
+\subsubsection{ReportMasterData}\label{sec:ReportMasterData}
 
 \begin{itemize}[noitemsep,topsep=1pt]
 \item \ttt{masterData}
 \begin{itemize}[itemsep=1pt, topsep=1pt]
-\item \ttt{logVersion: \textcolor{green}{Int}!}
-\item \ttt{gameVersion: \textcolor{green}{Int}}
-\item \ttt{lang: \textcolor{green}{String}}
-\item \ttt{abilities: [\textcolor{green}{ReportAbility}]}
-\item \ttt{actors(type: \textcolor{green}{String}, \\subType: \textcolor{green}{String}): [\textcolor{green}{ReportActor}]}
+\item \ttt{logVersion: \type{Int}!}
+\item \ttt{gameVersion: \type{Int}}
+\item \ttt{lang: \type{String}}
+\item \ttt{abilities: [\type{ReportAbility}]}
+\item \ttt{actors(type: \type{String}, \\subType: \type{String}): [\type{ReportActor}]}
 \end{itemize}
 \end{itemize}
 
-\textbf{ReportAbility}
+\subsubsection{\ttt{ReportAbility}}\label{sec:ReportAbility}
 
 \begin{itemize}[noitemsep,topsep=1pt]
 \item \ttt{abilities}
 \begin{itemize}[itemsep=1pt, topsep=1pt]
-\item \ttt{gameID: \textcolor{green}{Float}}
-\item \ttt{icon: \textcolor{green}{String}}
-\item \ttt{name: \textcolor{green}{String}}
-\item \ttt{type: \textcolor{green}{String}}
+\item \ttt{gameID: \type{Float}}
+\item \ttt{icon: \type{String}}
+\item \ttt{name: \type{String}}
+\item \ttt{type: \type{String}}
 \end{itemize}
 \end{itemize}
 
 
-\textbf{ReportActor}
+\subsubsection{\ttt{ReportActor}}\label{sec:ReportActor}
 
 \begin{itemize}[noitemsep,topsep=1pt]
 \item \ttt{actors}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{gameID: \textcolor{green}{Float}}
-\item \ttt{icon: \textcolor{green}{String}}
-\item \ttt{id: \textcolor{green}{Int}}
-\item \ttt{name: \textcolor{green}{String}}
-\item \ttt{petOwner: \textcolor{green}{Int}}
-\item \ttt{server: \textcolor{green}{String}}
-\item \ttt{subType: \textcolor{green}{String}}
-\item \ttt{type: \textcolor{green}{String}}
+\item \ttt{gameID: \type{Float}}
+\item \ttt{icon: \type{String}}
+\item \ttt{id: \type{Int}}
+\item \ttt{name: \type{String}}
+\item \ttt{petOwner: \type{Int}}
+\item \ttt{server: \type{String}}
+\item \ttt{subType: \type{String}}
+\item \ttt{type: \type{String}}
 \end{itemize}
 \end{itemize}
 
-\subsubsection{ReportArchiveStatus}
+\subsubsection{ReportArchiveStatus}\label{ReportArchiveStatus}
+
+
+\subsection{Example}
+
+\newpage
+
+\section{\ttt{UserData}}\label{sec:UserData}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{UserData}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{user(id: \type{Int}): \hyperref[sec:User]{\type{User}}}
+\item \ttt{currentUser: \hyperref[sec:User]{\type{User}}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{User}}\label{sec:User}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] User
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}!}
+\item \ttt{guilds: [\type{Guild}]}
+\item \ttt{characters: [\hyperref[sec:Character]{\type{Character}}]}
+\item \ttt{battleTag: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsection{Example}
+
+\newpage
 
 
 
-\section{\ttt{UserData}}
 
-\section{\ttt{WorldData}}
+\section{\ttt{WorldData}}\label{sec:WorldData}
 
 \begin{itemize}[noitemsep,topsep=1pt]
 \item \ttt{worldData}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{ecounter(id: \type{Int}): \type{Encounter}}
-\item \ttt{expansion(id: \type{int}): \type{Expansion}}
-\item \ttt{expansions: [\type{Expansion}]}
-\item \ttt{region(id: \type{Int}): \type{Region}}
-\item \ttt{region: [\type{Region}]}
-\item \ttt{server(id: \type{Int},\\region: \type{String},\\slug: \type{String}): \type{Server}}
-\item \ttt{subregion(id: \type{Int}): \type{Subregion}}
-\item \ttt{zone(id: \type{Int}): \type{Zone}}
-\item \ttt{zones(expansion\_id: \type{Int}): [\type{Zone}]}
+\item \ttt{ecounter(id: \type{Int}): \hyperref[sec:Encounter]{\type{Encounter}}}
+\item \ttt{expansion(id: \type{int}): \hyperref[sec:Expansion]{\type{Expansion}}}
+\item \ttt{expansions: [\hyperref[sec:Expansion]{\type{Expansion}}]}
+\item \ttt{region(id: \type{Int}): \hyperref[sec:Region]{\type{Region}}}
+\item \ttt{region: [\hyperref[sec:Region]{\type{Region}}]}
+\item \ttt{server(id: \type{Int},\\region: \type{String},\\slug: \type{String}): \hyperref[sec:Server]{\type{Server}}}
+\item \ttt{subregion(id: \type{Int}): \hyperref[sec:Subregion]{\type{Subregion}}}
+\item \ttt{zone(id: \type{Int}): \hyperref[sec:Zone]{\type{Zone}}}
+\item \ttt{zones(expansion\_id: \type{Int}): [\hyperref[sec:Zone]{\type{Zone}}]}
 \end{itemize}
 \end{itemize}
 
-\subsection{\ttt{Encounter}}
-\subsection{\ttt{Expansion}}
-\subsection{\ttt{Region}}
-
-\subsection{\ttt{Server}}
-\subsection{\ttt{Subregion}}
+\subsection{\ttt{Encounter}}\label{sec:Encounter}
 
 \begin{itemize}[noitemsep,topsep=1pt]
-\item \ttt{subregion}
+	\item[\ttt{Type}] \ttt{Encounter}
+	\begin{itemize}[itemsep=1pt,topsep=1pt]
+		\item \ttt{id: \type{Int}!}
+		\item \ttt{name: \type{String}!}
+		\item \ttt{characterRankings(bracket: \type{Int}, \\difficulty: \type{Int}, \\filter: \type{String}, \\page: \type{Int}, \\partition: \type{Int}, \\serverRegion: \type{String}, \\serverSlug: \type{String}, \\size: \type{Int}, \\leaderboard: \hyperref[sec:LeaderboardRank]{\type{LeaderboardRank}}, \\hardModeLevel: \hyperref[sec:HardModeLevelRankFilter]{\type{HardModeLevelRankFilter}}, \\metric: \hyperref[sec:CharacterRankingMetricType]{\type{CharacterRankingMetricType}}, \\includeCombatInfo: \type{Boolean}, \\className: \type{String}, \\specName: \type{String}, \\externalBuffs: \hyperref[sec:ExternalBuffRankFilter]{\type{ExternalBuffRankFilter}}, \\covenantID: \type{Int}, \\soulbindID: \type{Int}): \type{JSON}}
+		\item \ttt{fightRankings(bracket: \type{Int}, \\difficulty: \type{Int}, \\filter: \type{String}, \\page: \type{String}, \\partition: \type{Int}, \\serverRegion: \type{String}, \\serverSlug: \type{String}, \\size: \type{Int}, \\leaderboard: \hyperref[sec:LeaderboardRank]{\type{LeaderboardRank}}, \\hardModeLevel: \hyperref[sec:HardModeLevelRankFilter]{\type{HardModeLevelRankFilter}}, \\metric: \hyperref[sec:FightRankingMetricType]{\type{FightRankingMetricType}}): \type{JSON}}
+		\item \ttt{zone: \hyperref[sec:Zone]{\type{Zone}}!}
+		\item \ttt{journalID: \type{Int}!}
+	\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{Expansion}}\label{sec:Expansion}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{Expansion}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}!}
+\item \ttt{zones: [\hyperref[sec:Zone]{\type{Zone}}]}
+\end{itemize}
+\end{itemize}
+\subsection{\ttt{Region}}\label{sec:Region}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{Region}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{compactName: \type{String}!}
+\item \ttt{name: \type{String}!}
+\item \ttt{slug: \type{String}!}
+\item \ttt{subregions: [\hyperref[sec:Subregion]{\type{Subregion}}]}
+\item \ttt{servers(limit: \type{Int}, page: \type{Int}): \hyperref[sec:serverpagination]{\type{ServerPagination}}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{Server}}\label{sec:Server}
+
+%\hyperref[]{
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{Server}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}!}
+\item \ttt{normalizedName: \type{String}!}
+\item \ttt{slug: \type{String}!}
+\item \ttt{region: \hyperref[sec:Region]{\type{Region}}!}
+\item \ttt{subregion: \hyperref[sec:Subregion]{\type{Subregion}}!}
+\item \ttt{guilds(limit: \type{Int}, page: \type{Int}): \hyperref[sec:guildpagination]{\type{GuildPagination}}}
+\item \ttt{characters(limit: \type{Int}, page: \type{Int}): \hyperref[sec:characterpagination]{\type{CharacterPagination}}}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{Subregion}}\label{sec:Subregion}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{Subregion}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
 \item \ttt{id: \type{Int}!}
 \item \ttt{name: \type{String}!}
 \item \ttt{region: \type{Region}!}
-\item \ttt{servers(limit: \type{Int}, page: \type{Int}): \type{ServerPagination}}
+\item \ttt{servers(limit: \type{Int}, page: \type{Int}): \hyperref[sec:serverpagination]{\type{ServerPagination}}}
 \end{itemize}
 \end{itemize}
 
 
-\subsection{\ttt{Zone}}
+\subsection{\ttt{Zone}}\label{sec:Zone}
 
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{Zone}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{brackets: \hyperref[sec:Bracket]{\type{Bracket}}}
+\item \ttt{difficulties: [\type{Difficulty}]}
+\item \ttt{encounters: [\hyperref[sec:Encounter]{\type{Encounter}}]}
+\item \ttt{expansion: \hyperref[sec:Expansion]{\type{Expansion}}!}
+\item \ttt{frozen: \type{Boolean}!}
+\item \ttt{name: \type{String}!}
+\item \ttt{partitions: [\hyperref[sec:Partition]{\type{Partition}}]}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{\ttt{Bracket}}\label{sec:Bracket}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{brackets}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{min: \type{Float}!}
+\item \ttt{max: \type{Float}!}
+\item \ttt{bucket: \type{Float}}
+\item \ttt{type: \type{String}}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{\ttt{Partition}}\label{sec:Partition}
+\begin{itemize}[noitemsep,topsep=1pt]
+\item \ttt{partitions}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{id: \type{Int}!}
+\item \ttt{name: \type{String}!}
+\item \ttt{compactName: \type{String}!}
+\item \ttt{default: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{Example}
 
 \newpage
+
+%--------------------------------------------------------- Schema Pagination Objects ---------------------------------------------------------
 
 \section{\ttt{Pagination Objects}}
 
@@ -848,7 +1609,23 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{CharacterPagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{Character}]}
+\item \ttt{data: [\hyperref[sec:Character]{\type{Character}}]}
+\item \ttt{total: \type{Int}!}
+\item \ttt{per\_page: \type{Int}!}
+\item \ttt{current\_page: \type{Int}!}
+\item \ttt{from: \type{Int}}
+\item \ttt{to: \type{Int}}
+\item \ttt{last\_page: \type{Int}!}
+\item \ttt{has\_more\_pages: \type{Boolean}!}
+\end{itemize}
+\end{itemize}
+
+\subsection{\ttt{GameAchievementPagination}}\label{sec:gameachievementpagination}
+
+\begin{itemize}[noitemsep,topsep=1pt]
+\item[\ttt{Type}] \ttt{GameAchievementPagination}
+\begin{itemize}[itemsep=1pt,topsep=1pt]
+\item \ttt{data: [\hyperref[sec:GameAchievement]{\type{GameAchievement}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -864,7 +1641,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{GameAbilityPagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{GameAbility}]}
+\item \ttt{data: [\hyperref[sec:GameAbility]{\type{GameAbility}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -880,7 +1657,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{GameEnchantPagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{GameEnchant}]}
+\item \ttt{data: [\hyperref[sec:GameEnchant]{\type{GameEnchant}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -896,7 +1673,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{GameItemPagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{GameItem}]}
+\item \ttt{data: [\hyperref[sec:GameItem]{\type{GameItem}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -912,7 +1689,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{GameItemSetPagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{GameItemSet}]}
+\item \ttt{data: [\hyperref[sec:GameItemSet]{\type{GameItemSet}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -928,7 +1705,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{GameMapPagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{GameMap}]}
+\item \ttt{data: [\hyperref[sec:GameMap]{\type{GameMap}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -944,7 +1721,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{GameNPCPagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{GameNPC}]}
+\item \ttt{data: [\hyperref[sec:GameNPC]{\type{GameNPC}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -960,7 +1737,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{GameZonePagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{GameZone}]}
+\item \ttt{data: [\hyperref[sec:GameZone]{\type{GameZone}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -976,7 +1753,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{GuildAttendancePagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{GuildAttendance}]}
+\item \ttt{data: [\hyperref[sec:GuildAttendance]{\type{GuildAttendance}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -992,7 +1769,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{GuildPagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{Guild}]}
+\item \ttt{data: [\hyperref[sec:Guild]{\type{Guild}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -1018,7 +1795,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{ReportPagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{Report}]}
+\item \ttt{data: [\hyperref[sec:Report]{\type{Report}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -1034,7 +1811,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 \begin{itemize}[noitemsep,topsep=1pt]
 \item[\ttt{Type}] \ttt{ServerPagination}
 \begin{itemize}[itemsep=1pt,topsep=1pt]
-\item \ttt{data: [\type{Server}]}
+\item \ttt{data: [\hyperref[sec:Server]{\type{Server}}]}
 \item \ttt{total: \type{Int}!}
 \item \ttt{per\_page: \type{Int}!}
 \item \ttt{current\_page: \type{Int}!}
@@ -1049,7 +1826,7 @@ Clearly, this section in not meant as a substitution for an actual UML diagram a
 
 %--------------------------------------------------------- Schema Enums ---------------------------------------------------------
 
-\section{Important \ttt{Types}/\ttt{Enums}}
+\section{Important \ttt{Types}/\ttt{Enums}}\label{sec:Enums}
 
 \subsection{\ttt{CharacterRankingMetricType}}\label{sec:CharacterRankingMetricType}
 \begin{itemize}[noitemsep,topsep=1pt]
