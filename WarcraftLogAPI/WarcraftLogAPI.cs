@@ -41,9 +41,10 @@ namespace ReunionLogSoftware.WarcraftLogAPI{
             if (response.IsSuccessStatusCode){
                 var tokenResponse = await response.Content.ReadAsAsync<TokenResponse>();
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenResponse.AccessToken);
+                File.WriteAllText(".Credential.json", tokenResponse.AccessToken);
                 return tokenResponse.AccessToken;
             }
-
+            System.Console.WriteLine("Problem in WarcraftLogAPI.cs <GetAccessData>");
             throw new Exception($"Failed to retrieve access token. Status code: {response.StatusCode}");
         }
 
@@ -67,8 +68,8 @@ namespace ReunionLogSoftware.WarcraftLogAPI{
                 File.WriteAllText("reportData.json", reportData);
                 return reportData;
             }
-
-            throw new Exception($"Failed to retrieve report data. Status code: {response.StatusCode}");
+            System.Console.WriteLine("Problem in WarcraftLogAPI.cs <GetReportData>");
+            throw new Exception($"Failed to retrieve report data. Status code: {response.StatusCode}");            
         }
 
         private class TokenResponse{

@@ -13,8 +13,9 @@ namespace ReunionLogSoftware.QueryString{
             QString = "{query($code: String)}";
         }
 
-        public string AddField(String fieldString){
-            return "";
+        public void AddField(String fieldString){
+            int strLen = QString.Length;
+            QString.Insert(strLen-4, fieldString);
         }
 
         public string QueryCreator(){

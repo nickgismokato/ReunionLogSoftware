@@ -742,7 +742,7 @@ query{
 		\hline
 		\multicolumn{3}{|c|}{Input List} \\
 		\hline
-		Input & Type & Required\\
+		Input & Type & Requirement\\
 		\hline
 		\ttt{id}   & \ttt{Int} & Optional\\
 		\ttt{name}& \ttt{String} & Optional\\
@@ -766,7 +766,7 @@ query{
 		\hline
 		\multicolumn{3}{|c|}{Input List} \\
 		\hline
-		Input & Type & Required\\
+		Input & Type & Requirement\\
 		\hline
 		\ttt{guildID}   & \ttt{Int} & Required\\
 		\ttt{limit}& \ttt{Int} & Optional\\
@@ -852,7 +852,7 @@ query{
 		\hline
 		\multicolumn{3}{|c|}{Input List} \\
 		\hline
-		Input & Type & Required\\
+		Input & Type & Requirement\\
 		\hline
 		\ttt{byBracket}   & \ttt{Boolean} & Optional\\
 		\ttt{className}& \ttt{String} & Optional\\
@@ -981,6 +981,22 @@ query{
 
 \textbf{\ttt{recentReports}:}
 
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{Limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{ReportPagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
 \medskip
 
 \textbf{\ttt{server}:}
@@ -998,7 +1014,33 @@ query{
 
 \textbf{\ttt{zoneRankings}:}
 
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{byBracket} & \ttt{Boolean} & Optional\\
+		\ttt{className} & \ttt{String} & Optional\\
+		\ttt{compare} & \ttt{RankingCompareType} & Optional\\
+		\ttt{difficulty} & \ttt{Int} & Optional\\
+		\ttt{includePrivateLogs} & \ttt{Boolean} & Optional\\
+		\ttt{metric} & \ttt{CharacterRankingMetricType} & Optional\\
+		\ttt{partition} & \ttt{Int} & Optional\\
+		\ttt{role} & \ttt{RoleType} & Optional\\
+		\ttt{size} & \ttt{Int} & Optional\\
+		\ttt{specName} & \ttt{String} & Optional\\
+		\ttt{timeframe} & \ttt{RankingTimeframeType} & Optional\\
+		\ttt{zoneID} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{JSON}} \\
+		\hline
+	\end{tabular}
+\end{table}
 
+\newpage
 
 \subsection{Example}
 
@@ -1035,7 +1077,7 @@ This query call makes the toplevel call to \ttt{query}. Then after that it choos
 \item \ttt{affix(id: \type{Int}): \hyperref[sec:GameAffix]{\type{GameAffix}}}
 \item \ttt{affixes: [\hyperref[sec:GameAffix]{\type{GameAffix}}]}
 \item \ttt{class(id: \type{Int}, faction\_id: \type{Int}, zone\_id: \type{Int}): \hyperref[sec:GameClass]{\type{GameClass}}}
-\item \ttt{(faction\_id: \type{Int}, zone\_id: \type{Int}): [\hyperref[sec:GameClass]{\type{GameClass}}]}
+\item \ttt{classes(faction\_id: \type{Int}, zone\_id: \type{Int}): [\hyperref[sec:GameClass]{\type{GameClass}}]}
 \item \ttt{enchant(id: \type{Int}): \hyperref[sec:GameEnchant]{\type{GameEnchant}}}
 \item \ttt{enchants(limit: \type{Int}, page: \type{Int}): \hyperref[sec:gameenchantpagination]{\type{GameEnchantPagination}}}
 \item \ttt{factions: [\hyperref[sec:GameFaction]{\type{GameFaction}}]}
@@ -1051,6 +1093,403 @@ This query call makes the toplevel call to \ttt{query}. Then after that it choos
 \item \ttt{zones(limit: \type{Int}, page: \type{Int}): \hyperref[sec:gamezonepagination]{\type{GameZonePagination}}}
 \end{itemize}
 \end{itemize}
+
+\underline{\textbf{Details:}}
+
+\textbf{abilities:}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameAbilityPagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{ability:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{id} & \ttt{Int} & Required\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameAbility}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\newpage
+
+\textbf{achievement:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{id} & \ttt{Int} & Required\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameAchievement}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{achievements:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{int} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameAchievementPagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{affix:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{id} & \ttt{Int} & Required\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameAffix}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{affixes:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{[GameAffix]}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{class:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{id} & \ttt{Int} & Required\\
+		\ttt{faction\_id} & \ttt{Int} & Optional\\
+		\ttt{zone\_id} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameClass}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{classes:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{faction\_id} & \ttt{Int} & Optional\\
+		\ttt{zone\_id} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{[GameClass]}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\newpage
+
+\textbf{enchant:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{id} & \ttt{Int} & Required\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameEnchant}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{enchants:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameEnchantPagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{factions:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{[GameFaction]}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{item:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Required\\
+		\hline
+		\ttt{id} & \ttt{Int} & Requirement\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameItem}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{item\_set:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{id} & \ttt{Int} & Required\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameItemSet}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{item\_sets:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameItemSetPagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\newpage
+
+\textbf{items:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameItemPagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{map:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{id} & \ttt{Int} & Required\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameMap}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{maps:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameMapPagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{npc:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{id} & \ttt{Int} & Required\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameNPC}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{npcs:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameNPCPagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{zone:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{id} & \ttt{Int} & Required\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameZone}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\newpage
+
+\textbf{zones:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameZonePagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsection{\ttt{GameAbility}}\label{sec:GameAbility}
 
@@ -1182,6 +1621,28 @@ This query call makes the toplevel call to \ttt{query}. Then after that it choos
 
 \subsection{Example}
 
+\begin{lstlisting}[language=WowAPI]
+query{
+	gameData{
+		ability(id: 420){
+			name
+		}
+		factions{
+			name
+		}
+		class(id: 1, faction_id: 0){
+			name
+			specs{
+				id
+				name
+				slug
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+This could be a potential query someone would make. Here we get the \ttt{name} of the \ttt{ability} with \ttt{id: 420}, all \ttt{factions} names and the \ttt{name} and \ttt{specs} of the \ttt{class} with \ttt{id:1} and \ttt{faction\_id:0}.
 \newpage
 
 
@@ -1284,6 +1745,59 @@ This query call makes the toplevel call to \ttt{query}. Then after that it choos
 	\end{itemize}
 \end{itemize}
 
+\underline{\textbf{Details:}}
+
+\textbf{progressRace:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{serverRegion} & \ttt{String} & Optional\\
+		\ttt{serverSubregion} & \ttt{String} & Optional\\
+		\ttt{serverSlug} & \ttt{String} & Optional\\
+		\ttt{zoneId} & \ttt{Int} & Optional\\
+		\ttt{competitionID} & \ttt{Int} & Optional\\
+		\ttt{difficulty} & \ttt{Int} & Optional\\
+		\ttt{size} & \ttt{Int} & Optional\\
+		\ttt{guildID} & \ttt{Int} & Optional\\
+		\ttt{guildName} & \ttt{String} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{JSON}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{detailedComposition:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{competitionID} & \ttt{Int} & Optional\\
+		\ttt{guildID} & \ttt{Int} & Optional\\
+		\ttt{guildName} & \ttt{String} & Optional\\
+		\ttt{serverSlug} & \ttt{String} & Optional\\
+		\ttt{serverRegion} & \ttt{String} & Optional\\
+		\ttt{encounterID} & \ttt{Int} & Optional\\
+		\ttt{difficulty} & \ttt{Int} & Optional\\
+		\ttt{size} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{JSON}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
 \subsection{Example}
 
 \newpage
@@ -1303,6 +1817,18 @@ This query call makes the toplevel call to \ttt{query}. Then after that it choos
 \end{itemize}
 
 \subsection{Example}
+
+\begin{lstlisting}[language=WowAPI]
+query{
+	RateLimitData{
+		limitPrHour
+		pointSpentThisHour
+		pointsResetIn
+	}
+}
+\end{lstlisting}
+
+This is a full example of what a query for \ttt{RateLimitData} looks like. 
 
 \newpage
 
