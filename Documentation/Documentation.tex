@@ -1663,6 +1663,51 @@ This could be a potential query someone would make. Here we get the \ttt{name} o
 \end{itemize}
 \end{itemize}
 
+\underline{\textbf{Details}:}
+
+\textbf{guild:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{id} & \ttt{Int} & Optional\\
+		\ttt{name} & \ttt{String} & Optional\\
+		\ttt{serverSlug} & \ttt{String} & Optional\\
+		\ttt{serverRegion} & \ttt{String} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Guild}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{guilds:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\ttt{serverID} & \ttt{Int} & Optional\\
+		\ttt{serverSlug} & \ttt{String} & Optional\\
+		\ttt{serverRegion} & \ttt{String} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GuildPagination}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
 \subsection{\ttt{Guild}}\label{sec:Guild}
 
 \begin{itemize}[noitemsep,topsep=1pt]
@@ -1682,6 +1727,187 @@ This could be a potential query someone would make. Here we get the \ttt{name} o
 		\item \ttt{zoneRank(zoneID: \type{Int}): \hyperref[sec:GuildZoneRankings]{\type{GuildZoneRankings}}!}
 	\end{itemize}
 \end{itemize}
+
+\underline{\textbf{Details}:}
+
+\textbf{attendance:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{guildTagID} & \ttt{Int} & Optional\\
+		\ttt{limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\ttt{zoneID} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GuildAttendancePagination!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{competitionMode:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Boolean!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{description:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{String!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{faction:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GameFaction!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{id:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Int!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{name:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{String!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{server:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Server!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{stealthMode:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{Boolean!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{tags:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{[GuildTag]}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\newpage
+
+\textbf{members:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{limit} & \ttt{Int} & Optional\\
+		\ttt{page} & \ttt{Int} & Optional\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{CharacterPagination!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{curentUserRank:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GuildRank}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{zoneRank:}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{zoneID} & \ttt{Int} & Not documented\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{GuildZoneRankings!}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
 
 \subsubsection{\ttt{GuildTag}}\label{sec:GuildTag}
 
@@ -1704,6 +1930,71 @@ This could be a potential query someone would make. Here we get the \ttt{name} o
 \item \ttt{completeRaidSpeed(size: \type{Int}, difficulty: \type{Int}): \hyperref[sec:WorldRegionServerRankPositions]{\type{WorldRegionServerRankPositions}}}
 \end{itemize}
 \end{itemize}
+
+\underline{\textbf{Details}:}
+
+\textbf{progress:}
+
+\textit{Note!} Size is only used for classic and certain old retail \tsc{WoW} zones.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{size} & \ttt{Int} & See note above\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{WorldRegionServerRankPositions}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\newpage
+
+\textbf{speed:}
+
+\textit{Note!} Size is only used for classic and certain old retail \tsc{WoW} zones.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{size} & \ttt{Int} & See note above\\
+		\ttt{difficulty} & \ttt{Int} & Not documented (\textit{Probably not required})\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{WorldRegionServerRankPositions}} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\medskip
+
+\textbf{completeRaidSpeed:}
+
+\textit{Note!} Size is only used for classic and certain old retail \tsc{WoW} zones.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{4.2cm}|p{6cm}|p{3cm}|  }
+		\hline
+		\multicolumn{3}{|c|}{Input List} \\
+		\hline
+		Input & Type & Requirement\\
+		\hline
+		\ttt{size} & \ttt{Int} & See note above\\
+		\ttt{difficulty} & \ttt{Int} & Not documented (\textit{Probably not required})\\
+		\hline
+		\multicolumn{3}{|c|}{Output Type: \ttt{WorldRegionServerRankPositions}} \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsubsection{\ttt{GuildAttendance}}\label{sec:GuildAttendance}
 
@@ -1728,7 +2019,40 @@ This could be a potential query someone would make. Here we get the \ttt{name} o
 \end{itemize}
 \end{itemize}
 
+\newpage
+
 \subsection{Example}
+
+\begin{lstlisting}[language=WowAPI]
+query{
+	guildData{
+		guild(id: 1234, name: "TestGuild"){
+			description
+			faction{
+				id
+				name
+			}
+			server{
+				name
+				region{
+					id
+					name
+				}
+			}
+			members{
+				data{
+					id
+					name
+					classID
+				}
+				total
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+This example query access the guild with name \ttt{"TestGuild"} with the \ttt{id: 1234}. Then we get the description of the guild, the faction \ttt{id} and \ttt{name}, the server \ttt{name} and the \ttt{id} and \ttt{name} of the region. Lastly we get the members of the guild with the total amount and the \ttt{id, name} and \ttt{classID} of each member.
 
 \newpage
 
@@ -1800,6 +2124,15 @@ This could be a potential query someone would make. Here we get the \ttt{name} o
 
 \subsection{Example}
 
+\begin{lstlisting}[language=WowAPI]
+query{
+	progressRaceData{
+		progressRace(zoneID: 5, guildName: "TestGuild")
+		detailedComposition(guildName: "TestGuild")
+	}
+}
+\end{lstlisting}
+
 \newpage
 
 
@@ -1820,7 +2153,7 @@ This could be a potential query someone would make. Here we get the \ttt{name} o
 
 \begin{lstlisting}[language=WowAPI]
 query{
-	RateLimitData{
+	rateLimitData{
 		limitPrHour
 		pointSpentThisHour
 		pointsResetIn

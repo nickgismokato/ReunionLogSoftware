@@ -17,6 +17,25 @@ using Microsoft.AspNetCore;
 
 
 namespace ReunionLogSoftware.WarcraftLogAPI{
+    public class client{
+        List<clientVal> clientvals {get; set;}
+    }
+    public class clientVal{
+        public string client_id {get;set;} = string.Empty;
+        public string client_secret {get; set;} = string.Empty;
+    }
+    public class ReadAndParseJsonFile{
+        private readonly string _sampleJsonFilePath;
+        public ReadAndParseJsonFile(string sampleJsonFilePath){
+            _sampleJsonFilePath = sampleJsonFilePath;
+        }
+        public List<clientVal> UseUserDefinedObjectJson(){
+            using StreamReader reader = new(_sampleJsonFilePath);
+            var json = reader.ReadToEnd();
+            List<clientVal> clientVals = JsonConvert.DeserializeObject<List<clientVal>>(json);
+            return clientVals;
+        }
+    }
     public class WarcraftLogsApi{
         private readonly HttpClient _client;
         private readonly string _clientId;
