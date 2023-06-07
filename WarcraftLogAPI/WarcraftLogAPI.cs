@@ -15,37 +15,74 @@ using Newtonsoft.Json;
 
 using Microsoft.AspNetCore;
 
+using JsonWR;
 
 namespace ReunionLogSoftware.WarcraftLogAPI{
-    public class client{
-        List<clientVal> clientvals {get; set;}
+    public class ClientData{
+        [JsonProperty("client")]
+        public ClientInfo Client {get; set;}
     }
-    public class clientVal{
-        public string client_id {get;set;} = string.Empty;
-        public string client_secret {get; set;} = string.Empty;
-    }
-    public class ReadAndParseJsonFile{
-        private readonly string _sampleJsonFilePath;
-        public ReadAndParseJsonFile(string sampleJsonFilePath){
-            _sampleJsonFilePath = sampleJsonFilePath;
-        }
-        public List<clientVal> UseUserDefinedObjectJson(){
-            using StreamReader reader = new(_sampleJsonFilePath);
-            var json = reader.ReadToEnd();
-            List<clientVal> clientVals = JsonConvert.DeserializeObject<List<clientVal>>(json);
-            return clientVals;
-        }
+    public class ClientInfo{
+        [JsonProperty("client_id")]
+        public string ClientID {get;set;}
+
+        [JsonProperty("client_secret")]
+        public string ClientSecret {get; set;}
     }
     public class WarcraftLogsApi{
-        private readonly HttpClient _client;
-        private readonly string _clientId;
-        private readonly string _clientSecret;
+        //Fields
+        private HttpClient _client;
+        private string _clientId;
+        private string _clientSecret;
+        private string clientPath;
+        private ClientData clientData = null; 
 
-        public WarcraftLogsApi(string clientId, string clientSecret){
-            _clientId = clientId;
-            _clientSecret = clientSecret;
-            _client = new HttpClient();
+        //Constructor
+        public WarcraftLogsApi(){}
+
+        public async Task InitializeAsync(){
+            clientPath = Main.self.projectPath.GetProjectPath() + "/client.json";
+            System.Console.WriteLine(clientPath);
+
+            try
+            {
+                clientData = await JsonMain.ReadFromFileAsync<ClientData>(clientPath);
+                _clientId = clientData.Client.ClientID;
+                _clientSecret = clientData.Client.ClientSecret;
+
+                if (_clientId != null && _clientSecret != null)
+                {
+                    Console.WriteLine(_clientId);
+                    Console.WriteLine(_clientSecret);
+                    _client = new HttpClient();
+                }
+                else
+                {
+                    System.Console.WriteLine("Error: Invalid client data in JSON file");
+                    _clientId = "clientData?.Client?.ClientId";
+                    _clientSecret = "clientData?.Client?.ClientSecret";
+                    _client = new HttpClient();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Exception in the constructor of WarcraftLogsApi: {ex}");
+                _clientId = "clientData?.Client?.ClientId";
+                _clientSecret = "clientData?.Client?.ClientSecret";
+                _client = new HttpClient();
+            }
         }
+
+
+        public async Task<ClientData> GetClient(string clientPath){
+            try{
+                clientData = await JsonMain.ReadFromFileAsync<ClientData>(clientPath);
+                return clientData;
+            }catch(Exception ex){
+                System.Console.WriteLine($"Exception occurred in GetClient in WarcraftLogAPI: {ex}");
+                return null;
+            }
+        } 
 
         public async Task<string> GetAccessToken(){
             var content = new FormUrlEncodedContent(new Dictionary<string, string>

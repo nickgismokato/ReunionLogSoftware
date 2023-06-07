@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 
 using ReunionLogSoftware.States;
+using OSPlatform;
+using JsonWR;
 
 namespace ReunionLogSoftware;
 
@@ -11,6 +13,7 @@ public class Main : Game{
 
     public static Main self;
 
+    public AbsolutePath projectPath;
     private GraphicsDeviceManager _graphics;
     private SpriteBatch spriteBatch;
     private int i = 0;
@@ -23,7 +26,7 @@ public class Main : Game{
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        
+        projectPath = new AbsolutePath();
     }
 
     public void SessionExit(){

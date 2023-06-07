@@ -42,15 +42,17 @@ namespace ReunionLogSoftware.GraphControl{
     }
 
     public static class GraphBuilder {
-        public static async void Build(string code){
-            var client_id = "Client_name";
-            var client_secret = "Client_Secret";
-            var api = new WarcraftLogsApi(client_id, client_secret);
+        public static WarcraftLogsApi wla = new WarcraftLogsApi();
+
+        public static async Task Build(string code){
+            await wla.InitializeAsync();
+            System.Console.WriteLine("Trying to build in GraphBuilder.");
+            var api = wla;
             var accessToken = await api.GetAccessToken();
-            
+            System.Console.WriteLine("AccessToken called");
             var reportCode = "KqkXJwvdn6NT2tLZ";
             var reportData = await api.GetReportData(reportCode);
-            System.Console.WriteLine(reportData);
-        } 
+            System.Console.WriteLine(reportData.ToString());
+        }
     }
 }
