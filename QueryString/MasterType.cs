@@ -14,4 +14,8 @@ namespace ReunionLogSoftware.QueryString{
         User,
         World
     }
+     public enum CharacterType{
+        character,
+        characters
+     }
 }

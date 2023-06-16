@@ -2,24 +2,35 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ReunionLogSoftware.QueryString{
-    public class QueryString{
-        public string QString = null;
-        public MasterType mainType;
+     public static class GraphQlObjectParser{
+        public static string Parse(string queryType, string queryName, string[] subSelection, object @object = null, string objectTypeName = null){
+            var query = queryType + "{" + queryName;
+            if (@object != null){
+                query += "(";
+                if (objectTypeName != null){
+                    query += objectTypeName + ":" + "{";
+                }
+                var queryData = string.Empty;
+                foreach (var propertyInfo in @object.GetType().GetProperties()){
+                    var value = propertyInfo.GetValue(@object);
+                    if (value != null){
+                        var type = Nullable.GetUnderlyingType(propertyInfo.PropertyType) ?? propertyInfo.PropertyType;
+                        var valueQuotes = type == typeof(string) ? "\"" : string.Empty;
 
-        public QueryString(MasterType masterType){
-            mainType = masterType;
-            QString = "{query($code: String)}";
-        }
-
-        public void AddField(String fieldString){
-            int strLen = QString.Length;
-            QString.Insert(strLen-4, fieldString);
-        }
-
-        public string QueryCreator(){
-            return "";
+                        var queryPart = char.ToLowerInvariant(propertyInfo.Name[0]) + propertyInfo.Name.Substring(1) + ":" + valueQuotes + value + valueQuotes;
+                        queryData += queryData.Length > 0 ? "," + queryPart : queryPart;
+                    }
+                }
+                query += (objectTypeName != null ? queryData + "}" : queryData) + ")";
+            }
+            if (subSelection.Length > 0){
+                query += subSelection.Aggregate("{", (current, s) => current + (current.Length > 1 ? "," + s : s)) + "}";
+            }
+            query += "}";
+            return query;
         }
     }
 }

@@ -3,5 +3,5 @@ namespace ReunionLogSoftware.WarcraftLogAPI.Enum{
         Any,
         Require,
         Exclude
-    }
+    }   
 }

@@ -10,8 +10,8 @@ using System.Net.Http.Json;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 using Microsoft.AspNetCore;
 
@@ -42,6 +42,16 @@ namespace ReunionLogSoftware.WarcraftLogAPI{
 
         public async Task InitializeAsync(){
             clientPath = Main.self.projectPath.GetProjectPath() + "/client.json";
+            if(!File.Exists(clientPath)){
+                JObject jsonObject = new JObject(
+                    new JProperty("client",
+                        new JProperty("client_id","clientID"),
+                        new JProperty("client_secret","clientSecret")
+                    )
+                );
+                string jsonContent = jsonObject.ToString();
+                File.WriteAllText(clientPath, jsonContent);
+            }
             System.Console.WriteLine(clientPath);
 
             try
@@ -106,6 +116,7 @@ namespace ReunionLogSoftware.WarcraftLogAPI{
 
         public async Task<string> GetReportData(string reportCode){
             var query = @"query($code: String){reportData{report(code: $code){events(dataType: Deaths, endTime: 9999999999, wipeCutoff: 3){data}}}}";
+            
 
             var variables = new{
                 code = reportCode
